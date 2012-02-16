@@ -6,5 +6,5 @@ main/inc/conf/mail.conf.php
 install/sql/basicv04.sql
 
 nbproject
-courses/*
+
 main/fchat/data/*
