@@ -225,7 +225,7 @@ function write_dokeos_config_file($path)
 	$config['{SINGLE_DATABASE}'] = trueFalse($singleDbForm);
 	$config['{COURSE_TABLE_PREFIX}'] = ($singleDbForm ? 'crs_' : '');
 	$config['{DATABASE_GLUE}'] = ($singleDbForm ? '_' : '`.`');
-	$config['{DATABASE_PREFIX}'] = $dbPrefixForm;
+	$config['{DATABASE_PREFIX}'] = $dbPrefixForm.'_';
 	$config['{DATABASE_MAIN}'] = $dbNameForm;
 	$config['{DATABASE_STATS}'] = (($singleDbForm && empty($dbStatsForm)) ? $dbNameForm : $dbStatsForm);
 	$config['{DATABASE_SCORM}'] = (($singleDbForm && empty($dbScormForm)) ? $dbNameForm : $dbScormForm);

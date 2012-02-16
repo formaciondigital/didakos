@@ -73,9 +73,6 @@ switch ($access_lang) {
 						<input type="button" value="Português (Brazil)" onclick="cambiar_idioma('brazilian_fd')">
 					</form>
 				</div>
-				<div id="ayuda">
-					<a href="http://cursos.formaciondigital.com/apps/faqs/faq.html"><?php echo $Ayuda ?></a>
-				</div>
 			</div>
 			<div id="logo_fd">
 				<a href="http://www.didakos.org" ><img src="img/logo_login_inf.png" alt="Formación Digital" /></a>

@@ -51,38 +51,6 @@ require_once($includePath.'/lib/main_api.lib.php');
 api_session_start($already_installed);
 
 
-/*$error_message_not_installed = <<<EOM
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-		<head>
-			<title>Dokeos not installed!</title>
-			<style type="text/css" media="screen, projection">
-				
-				@import "main/css/public_admin/default.css";
-				
-			</style>
-		</head>
-		<body>
-			<div id="header">
-				<div id="header1"><a href="http://www.dokeos.com">Dokeos Homepage</a></div>
-				<div class="clear"></div>
-				<div id="header2">&nbsp;</div>
-				<div id="header3">&nbsp;</div>
-			</div>
-
-			<div style="text-align: center;"><br /><br />
-					<form action="main/install/index.php" method="get"><input type="submit" value="&nbsp;&nbsp; Click to INSTALL DOKEOS &nbsp;&nbsp;" /></form><br />
-					or <a href="documentation/installation_guide.html" target="_blank">read the installation guide</a><br /><br />
-			</div>
-
-			<div id="footer">
-				<div class="copyright">Platform <a href="http://www.dokeos.com"> Dokeos </a> &copy; 2008 </div>
-				&nbsp;
-			</div>
-		</body>
-</html>
-EOM;*/
-
 $error_message_db_problem = <<<EOM
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -426,6 +394,33 @@ if($_configuration['tracking_enabled'] && !isset($_SESSION['login_as']) && isset
 }
 
 
+/*
+==============================================================================
+		Página modificada por Formación Digital
+Autor: Eduardo García
+Página incial: global_inc.php (1.8.5)
+Página actual: global_inc.php
+Descripción: Sistema de verificación de tipo de Admin. Disponemos del Admin original que se 
+	genera al instalar la plataforma y de un segundo admin generado por este (Gestor)
+	que tiene un acceso limitado a las herramientas de administración. El user Admin
+	siempre tiene el las variables de sesion ($_SESSION["_user"]["user_id"] = 1 ) mientras
+	que cualquier nuevo admin generado tendra un $_SESSION["_user"]["user_id"] diferente a 1.
+
+	Para el Gestor cargamos el $rootAdminAppend="/gestor".
+==============================================================================
+*/
+
+if($_SESSION["_user"]["user_id"]!=1)
+{
+      $rootAdminAppend             							= "gestor/";
+
+}else{
+      $rootAdminAppend             							= "admin/";
+
+}
+
+      $rootAdminSys                							= $clarolineRepositorySys.$rootAdminAppend;
+      $rootAdminWeb                							= $clarolineRepositoryWeb.$rootAdminAppend;
 
 
 
