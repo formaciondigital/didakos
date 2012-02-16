@@ -144,4 +144,14 @@ $_configuration['session_lifetime']						= {SESSION_LIFETIME};
 // Version settings
 $_configuration['dokeos_version'] 	= '{NEW_VERSION}';
 $_configuration['dokeos_stable'] 	= {NEW_VERSION_STABLE};
+
+
+//=============================================================================
+//   Specific tools Parameters
+//=============================================================================
+// VLAB
+//url to connect to vlab api
+$_configuration['url_vlab_api'] =  '';
+
+
 ?>
