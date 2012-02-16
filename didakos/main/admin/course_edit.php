@@ -251,7 +251,7 @@ if( $form->validate())
         {
 	    $datos = CourseManager::get_course_information($course_code);
             $tool_table = Database :: get_course_table(TABLE_TOOL_LIST,$datos["db_name"]);
-	    $sql = "INSERT INTO  ".$tool_table."  VALUES ('', 'Vlab','vlab/index.php','vlab.gif','1','0','squaregrey.gif','0','_self','interaction')";	
+	    $sql = "INSERT INTO  ".$tool_table."  VALUES ('', 'Vlab','vlab/index.php','vlab.png','1','0','squaregrey.gif','0','_self','interaction')";	
 	     api_sql_query($sql, __FILE__, __LINE__);
 	 //## 10/01/2012 - cambiofd - vlab - eliminada la creacion de la plataforma en el esquema vlab
 	 }
