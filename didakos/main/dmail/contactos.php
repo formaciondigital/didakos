@@ -40,16 +40,16 @@ foreach($usuarios as $usuario)
 			'<td class="agenda" width="10%"><input type="checkbox" name="chk" value="'. $usuario['user_id'] .'"><input type="hidden" name="datos_agenda_'. $usuario['user_id'] .'" value="'. $usuario['firstname'] . ' ' .  $usuario['lastname'] . '"></td>';
 			if ($usuario['status']==5)
 			{
-			    echo '<td class="agenda" width="35%">' . utf8_encode($usuario['firstname']) . '</td>' .
-			    '<td class="agenda" width="35%"> ' . utf8_encode($usuario['lastname']) . '</td>' .
+			    echo '<td class="agenda" width="35%">' . $usuario['firstname'] . '</td>' .
+			    '<td class="agenda" width="35%"> ' . $usuario['lastname'] . '</td>' .
 			    '<td class="agenda" width="10%">Alumno</td>';
 			}
 			else
 			{
 			    if($usuario['status']==1)
 			    {
-			        echo '<td class="agenda" width="35%"><b>' . utf8_encode($usuario['firstname']) . '</b></td>' .
-			        '<td class="agenda" width="35%"><b> ' . utf8_encode($usuario['lastname']) . '</b></td>' .
+			        echo '<td class="agenda" width="35%"><b>' . $usuario['firstname'] . '</b></td>' .
+			        '<td class="agenda" width="35%"><b> ' . $usuario['lastname'] . '</b></td>' .
 			        '<td class="agenda" width="10%"><b>Tutor</b></td>';    			
    			    }
    			}
