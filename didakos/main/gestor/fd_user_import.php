@@ -67,16 +67,18 @@ function validate_data($users,$status)
 		}
 		
 		// chequeamos la validez del dni	
-		if (isset ($user['OfficialCode']) && $user['OfficialCode'] != "" )
-		{
+                // if (isset ($user['OfficialCode']) && $user['OfficialCode'] != "" )
+		// if (isset ($user['OfficialCode']) && $user['OfficialCode'] != "" )
+		// {
 			//No usamos la revisión de si está repetido dado que le proceso
 			//puede matricular si el alumno ya existe
 			//UserManagerFD::is_dni_available($official_code)
 				
 			//normalizamos el formato
-        		$dni = preg_replace( '/[^0-9A-Z]/i', '', $user['OfficialCode'] );
+        		// $dni = preg_replace( '/[^0-9A-Z]/i', '', $user['OfficialCode'] );
 
 			// Primero vamos a ver si se trata de un NIE
+                    /*
 				switch (substr ( $dni ,0, 1 )) {
     				case 'X':
 					//Si se trata de un NIE eliminamos la letra
@@ -109,8 +111,9 @@ function validate_data($users,$status)
 			//calculamos que letra corresponde al número del DNI o NIE
 			$stack = 'TRWAGMYFPDXBNJZSQVHLCKE';
 			$pos = substr($dni, 0, 8) % 23;
-			
+			*/
 			//echo strtoupper( substr($dni, 8, 1) ) . ' ' . substr($stack, $pos, 1);
+                    /*
 			if (strtoupper( substr($dni, 8, 1) ) == substr($stack, $pos, 1))
 			{    
 				//es valido
@@ -120,7 +123,9 @@ function validate_data($users,$status)
 				$user['error'] = 'Dni no v&aacute;lido (No valida)' . $user['OfficialCode'];
 				$errors[] = $user;
 			}
-		 }
+*/
+               //  }
+		 // }
 		
 	}//fin foreach
 	return $errors;
