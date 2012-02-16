@@ -1,0 +1,22 @@
+===============================================================================
+	Didakos - Learning Management System
+
+    Copyright (c) 2008-2012 Formacion Digital S.L.
+	Copyright (c) 2004-2008 Dokeos S.A.
+	Copyright (c) 2003-2007 Ghent University (UGent)
+	Copyright (c) 2001 Universite catholique de Louvain (UCL)
+	Copyright (c) 2003-2008 Vrije Universiteit Brussel (VUB)
+	Copyright (c) 2004-2008 Hoogeschool Gent (HoGent)
+
+	The full license can be read in "license.txt".
+
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+
+	See the GNU General Public License for more details.
+
+	Contact address: Formacion Digital S.L, Camas (Sevilla), Spain
+	Mail: info@formaciondigital.com
+===============================================================================

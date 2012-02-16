@@ -1,0 +1,55 @@
+<?php /*
+for more information: see languages.txt in the lang folder. 
+*/
+$langScormVersion = "versió";
+$langScormRestarted = "Totes les lliçons estan incompletes ara";
+$langScormNoNext = "Aquesta és la darrera lliçó";
+$langScormNoPrev = "Aquesta és la primera lliçó";
+$langScormTime = "Temps";
+$langScormNoOrder = "No hi ha una ordre establerta, pots clicar sobre qualsevol lliçó";
+$langScormScore = "Puntuació";
+$langScormLessonTitle = "Títol de la lliçó";
+$langScormStatus = "Situació";
+$langScormToEnter = "Per introduir";
+$langScormFirstNeedTo = "Primer necessites finalitzar";
+$langScormThisStatus = "Aquesta lliçó està ara";
+$langScormClose = "Tancar aplicació";
+$langScormRestart = "Reiniciar";
+$langScormCompstatus = "Completat";
+$langScormIncomplete = "Incomplert";
+$langScormPassed = "Aprovat";
+$langScormFailed = "Suspens";
+$langScormPrevious = "Anterior";
+$langScormNext = "Següent";
+$langScormTitle = "Visualitzador de continguts DOKEOS";
+$langScormMystatus = "La meva situació";
+$langScormNoItems = "Aquest contingut no té elements";
+$langScormNoStatus = "No hi ha situació per aquest contingut";
+$langScormLoggedout = "Has sortit de l\'àrea SCORM";
+$langScormCloseWindow = "Tancar finestres";
+$ScormBrowsed = "Vist";
+$langScormExitFullScreen = "Tornar a la pantalla normal";
+$langScormFullScreen = "Pantalla completa";
+$langScormNotAttempted = "Sense intentar";
+$langCharset = "Joc de caràcters";
+$langLocal = "Local";
+$langRemote = "Remot";
+$langAutodetect = "Autodetectar";
+$langAccomplishedStepsTotal = "Total d'elements realitzats";
+$langUnknown = "Desconegut";
+$AreYouSureToDeleteSteps = " Està segur de voler eliminar aquests elements ?";
+$Origin = "Origen";
+$Local = "Local";
+$Remote = "Remot";
+$FileToUpload = "Arxiu a enviar";
+$ContentMaker = "Creador de continguts";
+$ContentProximity = "Localització del contingut";
+$UploadLocalFileFromGarbageDir = "Enviar arxiu local des del directori main/garbage";
+$ThisItemIsNotExportable = "Aquest element, per ara, no és compatible con SCORM. Per aixó, no és exportable.";
+$MoveCurrentChapter = "Moure el capítol actual";
+$GenericScorm = "SCORM genèric";
+$UnknownPackageFormat = "El format del paquet no pot ser reconegut. Si us plau, cerciori's que estigui ben creat i que no contingui errors. Els problemes poden haver-se del format ZIP o a la transferència de fitxers molt llargs. Si no està segur del fitxer ZIP usi el mínim de funcionalitats en comprimir.";
+$Attempt = "Intent";
+$MoveTheCurrentForum = "Moure el fòrum actual";
+$WarningWhenEditingScorm = "Avís! <br />Si edita el contingut d'un element scorm, pot alterar l'informe de la seqüència d'aprenentatge o danyar l'element.";
+?>

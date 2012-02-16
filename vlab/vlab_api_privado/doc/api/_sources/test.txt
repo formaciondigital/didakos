@@ -1,0 +1,24 @@
+.. _tests:
+
+Tests
+=====
+
+* Intentamos crear una que no existe
+
+http://localhost:8000/vlab/api/new/0000000001/040/0000000003/
+
+* O una que existe con más tiempo del permitido
+
+http://localhost:8000/vlab/api/new/0000000001/540/0000000001/
+
+* Ahora una cuyo virtual ami existe pero que no tiene amis reales asociados
+
+http://localhost:8000/vlab/api/new/0000000001/120/0000000002/
+
+* Creamos una nueva
+
+http://localhost:8000/vlab/api/new/0000000001/040/0000000001/
+
+* Volvemos a intentar crear la misma
+
+http://localhost:8000/vlab/api/new/0000000001/040/0000000001/

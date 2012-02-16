@@ -1,0 +1,10 @@
+# Ignorar ficheros de copias de seguridad
+
+main/inc/conf/configuration.php
+main/inc/conf/fd_configuration.php
+main/inc/conf/mail.conf.php
+install/sql/basicv04.sql
+
+nbproject
+courses/*
+main/fchat/data/*

@@ -1,0 +1,5 @@
+$PleaseLoginAgainFromHomepage = "Si us plau, intenteu ingressar de nou des de la pàgina principal";
+$NotAllowedClickBack="Ho sentim, no te accés a aquesta pàgina. Si us plau, feu clic al vostre navegador al botó:  \'Tornar\' per anar a la pàgina anterior.";
+$BackToPreviousPage="Tornar a la pàgina anterior";
+$LoginSuccessfulGoToX="Inici de sessió correcte. Anar a %s";
+$AttemptingToLoginAs="Iniciant sessió com %s %s (id %s)";

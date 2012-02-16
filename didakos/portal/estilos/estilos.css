@@ -1,0 +1,76 @@
+@charset "utf-8";
+body {
+    margin-top: 100px;
+    font-family: Arial;
+	color: #616161;
+	text-align: center;
+}
+img {
+    border: none;
+}
+a {
+	color: #484848;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+input {
+	max-width: 130px;
+	padding: 0px 4px;
+	height: 20px;
+	border: 1px solid #0087AB;
+    border-radius: 5px;
+}
+input[type=submit], input[type=button] {
+	cursor: pointer;
+	height: 24px;
+}
+input[type=submit]:hover, input[type=button]:hover {
+	color: #000;
+	background-color: #DDD;
+}
+#contenedor {
+	top: 100px;
+    margin: auto;
+    width: 600px;
+}
+#caja_login {
+    background-image: url('../img/img_base.gif');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-color: #F2F2F2;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #0087AB;
+    /*border-radius: 25px;*/
+	border-top-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+#caja_login div {
+	padding: 10px 0px;
+}
+#titulo {
+	font-size: 20px;
+	font-weight: bold;
+}
+#campos {
+	padding: 18px 0px !important;
+}
+#idiomas {
+	font-size: 20px;
+	font-weight: bold;
+    background-color: #FAFAFA;
+    border: 1px solid #E6E6E6;
+	border-top-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+#ayuda {
+	text-align: right;
+	font-size: 12px;
+	margin-bottom: 30px;
+}
+#logo_fd {
+	text-align: right;
+	padding-right: 30px;
+}

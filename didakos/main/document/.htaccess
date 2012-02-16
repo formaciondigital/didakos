@@ -1,0 +1,15 @@
+###################################################################################################################################
+# FICHERO .htaccess para SUBIR DOCUMENTOS:
+# main/document
+###################################################################################################################################
+
+# 30 sg
+php_value max_execution_time 30     
+# 60 sg
+php_value max_input_time 60   
+# 16 MB       
+php_value memory_limit 16M    
+#  8 MB	       
+php_value post_max_size 16M	
+#  2 MB     	 
+php_value upload_max_filesize 16M    

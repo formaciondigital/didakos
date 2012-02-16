@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Views &mdash; Virtual Labs v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Virtual Labs v1.0 documentation" href="index.html" />
+    <link rel="prev" title="Models" href="models.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Virtual Labs v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-vlab.api.views">
+<span id="views"></span><h1>Views<a class="headerlink" href="#module-vlab.api.views" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="vlab.api.views.info">
+<tt class="descclassname">vlab.api.views.</tt><tt class="descname">info</tt><big>(</big><em>request</em>, <em>type</em>, <em>ext_id</em><big>)</big><a class="headerlink" href="#vlab.api.views.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance informacion</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>request</em> (Request object) &#8211; Request object</li>
+<li><em>type</em> (string) &#8211; operation type (info in this case)</li>
+<li><em>ext_id</em> (integer -10 digits-) &#8211; External identifier. Used by the service which made the request for tracking purposes</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">HttpResponse object (json output)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vlab.api.views.list">
+<tt class="descclassname">vlab.api.views.</tt><tt class="descname">list</tt><big>(</big><em>request</em>, <em>type</em><big>)</big><a class="headerlink" href="#vlab.api.views.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Active instances informacion</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>request</em> (Request object) &#8211; Request object</li>
+<li><em>type</em> (string) &#8211; operation type (list in this case)</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">HttpResponse object (json output)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vlab.api.views.new">
+<tt class="descclassname">vlab.api.views.</tt><tt class="descname">new</tt><big>(</big><em>request</em>, <em>type</em>, <em>ext_id</em>, <em>time</em>, <em>virtual_ami</em><big>)</big><a class="headerlink" href="#vlab.api.views.new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launches a new instance</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>request</em> (Request object) &#8211; Request object</li>
+<li><em>type</em> (string) &#8211; operation type (new in this case)</li>
+<li><em>ext_id</em> (integer -10 digits-) &#8211; External identifier. Used by the service which made the request for tracking purposes</li>
+<li><em>time</em> (integer -minutes, 3 digits max-) &#8211; Instance life time</li>
+<li><em>virtual_ami</em> (integer -10 digits-) &#8211; Virtual AMI identifier. Will be linked to real ami ids in the different regions</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">HttpResponse object (json output)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vlab.api.views.stop">
+<tt class="descclassname">vlab.api.views.</tt><tt class="descname">stop</tt><big>(</big><em>request</em>, <em>type</em>, <em>ext_id</em><big>)</big><a class="headerlink" href="#vlab.api.views.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops a running instance</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>request</em> (Request object) &#8211; Request object</li>
+<li><em>type</em> (string) &#8211; operation type (stop in this case)</li>
+<li><em>ext_id</em> (integer -10 digits-) &#8211; External identifier. Used by the service which made the request for tracking purposes</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">HttpResponse object (json output)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="models.html"
+                                  title="previous chapter">Models</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/views.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             >previous</a> |</li>
+        <li><a href="index.html">Virtual Labs v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Dpto. Sistemas.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

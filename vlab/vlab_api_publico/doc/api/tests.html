@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tests &mdash; Virtual Labs v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Virtual Labs v1.0 documentation" href="index.html" />
+    <link rel="next" title="Documentación interna" href="internal.html" />
+    <link rel="prev" title="API" href="api.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="internal.html" title="Documentación interna"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Virtual Labs v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tests">
+<span id="id1"></span><h1>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h1>
+<p>URLs para testear algunas de las operaciones del API.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ojo! Estas urls comienzan por <a class="reference external" href="http://localhost:8000/">http://localhost:8000/</a>, por lo que
+únicamente funcionarán desde el entorno de desarrollo para el que
+se diseñó. Para realizar las pruebas en producción bastará con
+cambiar el inicio de la misma.</p>
+</div>
+<div class="section" id="listado-de-maquinas-virtuales-disponibles-list">
+<h2>Listado de máquinas virtuales disponibles (list)<a class="headerlink" href="#listado-de-maquinas-virtuales-disponibles-list" title="Permalink to this headline">¶</a></h2>
+<p>(Lanzado desde la plataforma)</p>
+<ul>
+<li><p class="first">Mostramos el listado de máquinas virtuales disponibles</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/list/">http://localhost:8000/vlab/api/list/</a></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="nueva-maquina-new">
+<h2>Nueva máquina (new)<a class="headerlink" href="#nueva-maquina-new" title="Permalink to this headline">¶</a></h2>
+<p>(Lanzado desde la plataforma)</p>
+<ul>
+<li><p class="first">Hacemos una petición sin respetar el formato de la url</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/new/0000000XXX001/040/0000000003/">http://localhost:8000/vlab/api/new/0000000XXX001/040/0000000003/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Intentamos crear una que no existe</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/new/0000000001/040/0000000003/">http://localhost:8000/vlab/api/new/0000000001/040/0000000003/</a></p>
+</blockquote>
+</li>
+<li><p class="first">O una que existe con más tiempo del permitido</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/new/0000000001/540/0000000001/">http://localhost:8000/vlab/api/new/0000000001/540/0000000001/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Ahora una cuyo virtual ami existe pero que no tiene amis reales asociados</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/new/0000000001/120/0000000002/">http://localhost:8000/vlab/api/new/0000000001/120/0000000002/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Creamos una nueva</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/new/0000000001/040/0000000001/">http://localhost:8000/vlab/api/new/0000000001/040/0000000001/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Volvemos a intentar crear la misma</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/new/0000000001/040/0000000001/">http://localhost:8000/vlab/api/new/0000000001/040/0000000001/</a></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="notificamos-el-arranque-de-una-maquina-virtual-launched">
+<h2>Notificamos el arranque de una máquina virtual (launched)<a class="headerlink" href="#notificamos-el-arranque-de-una-maquina-virtual-launched" title="Permalink to this headline">¶</a></h2>
+<p>(Esto lo realizará cada instancia)</p>
+<ul>
+<li><p class="first">Notificamos el lanzamiento de una máquina que no existe</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/launched/0000000008/">http://localhost:8000/vlab/api/launched/0000000008/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Notificamos el lanzamiento de la máquina que creamos anteriormente</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/launched/0000000001/">http://localhost:8000/vlab/api/launched/0000000001/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Volvemos a notificar el lanzamiento de la máquina que creamos anteriormente</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/launched/0000000001/">http://localhost:8000/vlab/api/launched/0000000001/</a></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="obtener-informacion-de-una-maquina">
+<h2>Obtener información de una máquina<a class="headerlink" href="#obtener-informacion-de-una-maquina" title="Permalink to this headline">¶</a></h2>
+<p>(Esto lo realizará la plataforma)</p>
+<ul>
+<li><p class="first">Solicitamos información de una máquina que no existe</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/info/0000000005/">http://localhost:8000/vlab/api/info/0000000005/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Solicitamos información de la máquina que creamos anteriormente</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/info/0000000001/">http://localhost:8000/vlab/api/info/0000000001/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Solicitamos información de una máquina sin respetar el formato de la url</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/info/000000000111111/">http://localhost:8000/vlab/api/info/000000000111111/</a></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="paramos-una-maquina-virtual">
+<h2>Paramos una máquina virtual<a class="headerlink" href="#paramos-una-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<p>(Esto lo realizará el proceso que controla el tiempo de vida de cada máquina)</p>
+<ul>
+<li><p class="first">Solicitamos la parada de una máquina que no existe</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/stop/0000000004/">http://localhost:8000/vlab/api/stop/0000000004/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Solicitamos la parada de la máquina que creamos anteriormente</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/stop/0000000001/">http://localhost:8000/vlab/api/stop/0000000001/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Volvemos a solicitar la parada de la máquina que creamos anteriormente</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/stop/0000000001/">http://localhost:8000/vlab/api/stop/0000000001/</a></p>
+</blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="notificamos-la-parada-de-una-maquina-virtual-stopped">
+<h2>Notificamos la parada de una máquina virtual (stopped)<a class="headerlink" href="#notificamos-la-parada-de-una-maquina-virtual-stopped" title="Permalink to this headline">¶</a></h2>
+<p>(Esto lo realizará cada instancia)</p>
+<ul>
+<li><p class="first">Notificamos la parada de una máquina que no existe</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/stopped/0000000008/">http://localhost:8000/vlab/api/stopped/0000000008/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Notificamos la parada de la máquina que creamos anteriormente</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/stopped/0000000001/">http://localhost:8000/vlab/api/stopped/0000000001/</a></p>
+</blockquote>
+</li>
+<li><p class="first">Volvemos a notificar la parada de la máquina que creamos anteriormente</p>
+<blockquote>
+<p><a class="reference external" href="http://localhost:8000/vlab/api/stopped/0000000001/">http://localhost:8000/vlab/api/stopped/0000000001/</a></p>
+</blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Tests</a><ul>
+<li><a class="reference external" href="#listado-de-maquinas-virtuales-disponibles-list">Listado de máquinas virtuales disponibles (list)</a></li>
+<li><a class="reference external" href="#nueva-maquina-new">Nueva máquina (new)</a></li>
+<li><a class="reference external" href="#notificamos-el-arranque-de-una-maquina-virtual-launched">Notificamos el arranque de una máquina virtual (launched)</a></li>
+<li><a class="reference external" href="#obtener-informacion-de-una-maquina">Obtener información de una máquina</a></li>
+<li><a class="reference external" href="#paramos-una-maquina-virtual">Paramos una máquina virtual</a></li>
+<li><a class="reference external" href="#notificamos-la-parada-de-una-maquina-virtual-stopped">Notificamos la parada de una máquina virtual (stopped)</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="api.html"
+                                  title="previous chapter">API</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="internal.html"
+                                  title="next chapter">Documentación interna</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/tests.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="internal.html" title="Documentación interna"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             >previous</a> |</li>
+        <li><a href="index.html">Virtual Labs v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Dpto. Sistemas, Formación Digital.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

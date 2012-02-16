@@ -1,0 +1,17 @@
+# Sphinx inventory version 1
+# Project: Virtual Labs
+# Version: 1.0
+vlab.api.views mod internal.html
+vlab.api.models mod internal.html
+vlab.api.views.launched function internal.html
+vlab.api.models.AMI class internal.html
+vlab.api.models.VirtualAMI class internal.html
+vlab.api.models.Instance class internal.html
+vlab.api.views.info function internal.html
+vlab.api.models.Request class internal.html
+vlab.api.views.stop function internal.html
+vlab.api.models.Keypair class internal.html
+vlab.api.models.Region class internal.html
+vlab.api.views.list function internal.html
+vlab.api.views.stopped function internal.html
+vlab.api.views.new function internal.html

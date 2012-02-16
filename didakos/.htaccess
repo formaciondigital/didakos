@@ -1,0 +1,39 @@
+################################################################################
+# FICHERO .htaccess GENERAL, situado en el raíz de la plataforma
+# MODIFICARLO SÓLO EN CASO NECESARIO. EXISTEN LOS SIGUIENTES .htaccess 
+# (para modificar en caso necesario para cada funcionalidad):
+
+# para IMPORTACIÓN CONTENIDO SCORM:
+# main/upload
+
+# para EXPORTACIÓN/IMPORTACIÓN CURSO COMPLETO:
+# main/coursecopy
+
+# para SUBIR DOCUMENTOS:
+# main/document
+
+# para SUBIR IMÁGENES DE EJERCICIOS:
+# main/exercice
+###############################################################################
+
+# max_execution_time: tiempo máximo de ejecución de cada script en segundos.
+# 30 sg
+php_value max_execution_time 180 
+
+# max_input_time: tiempo máximo para analizar la petición de datos.    
+# 60 sg
+php_value max_input_time 180   
+
+# cantidad maxima de memoria en bytes que un script puede usar
+# 16 MB       
+php_value memory_limit 32M    
+
+# post_max_size: tamaño máximo de datos enviados por POST.
+#  8 MB	       
+php_value post_max_size 32M	
+
+# upload_max_filesize: tamaño máximo para subir archivos.
+#  2 MB     	 
+php_value upload_max_filesize 16M   
+ 
+DirectoryIndex index.html index.php

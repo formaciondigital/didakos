@@ -1,0 +1,589 @@
+<?php // $Id: activity.php,v 1.5 2006/08/10 14:34:54 pcool Exp $
+/*
+==============================================================================
+	Dokeos - elearning and course management software
+
+	Copyright (c) 2004-2005 Dokeos S.A.
+	Copyright (c) 2003 Ghent University
+	Copyright (c) 2001 Universite Catholique de Louvain
+	Copyright (c) various contributors
+
+	For a full list of contributors, see "credits.txt".
+	The full license can be read in "license.txt".
+
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
+
+	See the GNU General Public License for more details.
+
+	Contact address: Dokeos, 44 rue des palais, B-1030 Brussels, Belgium
+	Mail: info@dokeos.com
+==============================================================================
+*/
+/**
+==============================================================================
+*         HOME PAGE FOR EACH COURSE
+*
+*	This page, included in every course's index.php is the home
+*	page. To make administration simple, the teacher edits his
+*	course from the home page. Only the login detects that the
+*	visitor is allowed to activate, deactivate home page links,
+*	access to the teachers tools (statistics, edit forums...).
+*
+*	@package dokeos.course_home
+==============================================================================
+*/
+
+/*
+==============================================================================
+		Página modificada por Formación Digital
+
+Autor: Eduardo García
+Página incial: activity.php (1.8.5)
+Página actual: activity.php
+Descripción: Página que muestra las herramientas accesibles para cada curso dependiendo
+del tipo de usuario. Hemos añadido un acceso como admin para poder diferenciar entre
+tutor y administrador (Antes se gestionaban como uno solo).
+		
+==============================================================================
+*/
+
+/*
+==============================================================================
+		FUNCTIONS
+==============================================================================
+*/
+
+/**
+ * Displays the tools of a certain category.
+ *
+ * @return void
+ * @param string $course_tool_category	contains the category of tools to display:
+ * "toolauthoring", "toolinteraction", "tooladmin", "tooladminplatform"
+ */
+
+function show_tools_category($course_tool_category)
+{
+	$web_code_path = api_get_path(WEB_CODE_PATH);
+	$course_tool_table = Database::get_course_table(TABLE_TOOL_LIST);
+	$is_allowed_to_edit = api_is_allowed_to_edit();
+	$is_platform_admin = api_is_platform_admin();
+
+	switch ($course_tool_category)
+	{
+		case TOOL_STUDENT_AUTHORING:
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE visibility = '1' AND  category = 'authoring' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+				
+		case TOOL_STUDENT_INTERACTION:
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE visibility = '1' AND  category = 'interaction' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+				
+		case TOOL_STUDENT_NINGUNA:
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE visibility = '1' AND  category = 'ninguna_categoria' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+
+
+		case TOOL_AUTHORING:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'authoring' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+
+		case TOOL_INTERACTION:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'interaction' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+				
+		case TOOL_NINGUNA:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'ninguna_categoria' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+
+
+		case TOOL_ADMIN_VISIBLE:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'admin'  ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+
+		case TOOL_ADMIN_PLATEFORM:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'admin' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;	
+	// Se añaden estos tres nuevos tipos para poder manejar tutores y administradores por separado
+		case TOOL_AUTHORING_TUTOR:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'authoring' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+
+		case TOOL_INTERACTION_TUTOR:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'interaction' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+				
+				
+		case TOOL_NINGUNA_TUTOR:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'ninguna_categoria' ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+
+
+		case TOOL_ADMIN_PLATEFORM_TUTOR:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'admin' and name not in ('course_setting','course_maintenance') ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;	
+	   //cambio fd - 07/03/2011 - heramientas añadidas para el perfil del inspector
+	   
+		case TOOL_AUTHORING_INSPECTOR:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'authoring' and visibility = 1 and  name in ('learnpath','document','quiz','link','student_publication') ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+
+		case TOOL_INTERACTION_INSPECTOR:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'interaction' and visibility = 1 and  name in ('Dmail','forum','announcement','calendar_event','chat')  ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;
+				
+
+		case TOOL_ADMIN_PLATFORM_INSPECTOR:
+
+				$result = api_sql_query("SELECT * FROM $course_tool_table WHERE category = 'admin' and name in ('tracking') ORDER BY id",__FILE__,__LINE__);
+				$colLink ="##003399";
+				break;	
+
+	}
+
+	while ($temp_row = Database::fetch_array($result))
+	{
+		$all_tools_list[]=$temp_row;
+	}
+	
+	if(api_is_course_coach())
+	{
+		$result = api_sql_query("SELECT * FROM $course_tool_table WHERE name='tracking'",__FILE__,__LINE__);
+		$all_tools_list[]=Database :: fetch_array($result);
+	}
+
+	$i=0;
+	// grabbing all the links that have the property on_homepage set to 1
+	$course_link_table = Database::get_course_table(TABLE_LINK);
+	$course_item_property_table = Database::get_course_table(TABLE_ITEM_PROPERTY);
+
+	switch ($course_tool_category)
+	{
+			case TOOL_AUTHORING:
+			$sql_links="SELECT tl.*, tip.visibility
+					FROM $course_link_table tl
+					LEFT JOIN $course_item_property_table tip ON tip.tool='link' AND tip.ref=tl.id
+						WHERE tl.on_homepage='1'";
+
+			break;
+
+			case TOOL_INTERACTION:
+			$sql_links = null;
+			/*
+			$sql_links="SELECT tl.*, tip.visibility
+				FROM $course_link_table tl
+				LEFT JOIN $course_item_property_table tip ON tip.tool='link' AND tip.ref=tl.id
+						WHERE tl.on_homepage='1' ";
+			*/
+			break;
+
+			case TOOL_STUDENT_VIEW:
+				$sql_links="SELECT tl.*, tip.visibility
+				FROM $course_link_table tl
+				LEFT JOIN $course_item_property_table tip ON tip.tool='link' AND tip.ref=tl.id
+						WHERE tl.on_homepage='1'";
+			break;
+
+			case TOOL_ADMIN:
+				$sql_links="SELECT tl.*, tip.visibility
+				FROM $course_link_table tl
+				LEFT JOIN $course_item_property_table tip ON tip.tool='link' AND tip.ref=tl.id
+						WHERE tl.on_homepage='1'";
+			break;
+
+		default:
+			$sql_links = null;
+			break;
+	}
+
+	//edit by Kevin Van Den Haute (kevin@develop-it.be) for integrating Smartblogs
+	if($sql_links != null)
+	{
+		$result_links = api_sql_query($sql_links,__FILE__,__LINE__);
+		$properties = array();
+		while($links_row = Database::fetch_array($result_links))
+		{
+			unset($properties);
+
+			$properties['name'] = $links_row['title'];
+			$properties['link'] = $links_row['url'];
+			$properties['visibility'] = $links_row['visibility'];
+			$properties['image'] = ($links_row['visibility']== '0') ? "file_html.gif" : "file_html.gif";
+			$properties['adminlink'] = api_get_path(WEB_CODE_PATH) . "link/link.php?action=editlink&id=".$links_row['id'];
+
+			$tmp_all_tools_list[] = $properties;
+		}
+	}
+
+	if(isset($tmp_all_tools_list))
+	{
+		foreach($tmp_all_tools_list as $toolsRow)
+		{
+
+			if($toolsRow['image'] == 'blog.gif')
+			{
+				// Init
+				$tbl_blogs_rel_user = Database::get_course_table(TABLE_BLOGS_REL_USER);
+
+				// Get blog id
+				$blog_id = substr($toolsRow['link'], strrpos($toolsRow['link'], '=') + 1, strlen($toolsRow['link']));
+
+				// Get blog members
+				if($is_platform_admin)
+				{
+					$sql_blogs = "
+						SELECT *
+						FROM " . $tbl_blogs_rel_user . " `blogs_rel_user`
+						WHERE `blog_id` = " . $blog_id;
+				}
+				else
+				{
+					$sql_blogs = "
+						SELECT *
+						FROM " . $tbl_blogs_rel_user . " `blogs_rel_user`
+						WHERE
+							`blog_id` = " . $blog_id . " AND
+							`user_id` = " . api_get_user_id();
+				}
+
+				$result_blogs = api_sql_query($sql_blogs, __FILE__, __LINE__);
+
+				if(Database::num_rows($result_blogs) > 0)
+					$all_tools_list[] = $toolsRow;
+			}
+			else
+				$all_tools_list[] = $toolsRow;
+		}
+	}
+
+	if(isset($all_tools_list))
+	{
+		$lnk = '';
+		foreach($all_tools_list as $toolsRow)
+		{
+			if(!($i%2))
+				{echo	"<tr valign=\"top\">\n";}
+
+			// This part displays the links to hide or remove a tool.
+			// These links are only visible by the course manager.
+			unset($lnk);
+			echo '<td width="50%">' . "\n";
+			if($is_allowed_to_edit)
+			{
+				if($toolsRow['visibility'] == '1' && $toolsRow['admin'] !='1')
+				{
+
+					$link['name'] = '<img src="'.api_get_path(WEB_CODE_PATH).'img/visible.gif" align="absmiddle" alt="'.get_lang("Deactivate").'"/>';
+
+					$link['cmd'] = "hide=yes";
+					$lnk[] = $link;
+				}
+
+				if($toolsRow['visibility'] == '0' && $toolsRow['admin'] !='1')
+				{
+					$link['name'] = '<img src="'.api_get_path(WEB_CODE_PATH).'img/invisible.gif" align="absmiddle" alt="'.get_lang("Activate").'"/>';
+					$link['cmd'] = "restore=yes";
+					$lnk[] = $link;
+				}
+
+				if(!empty($toolsRow['adminlink']))
+				{
+					echo	'<a href="'.$toolsRow['adminlink'].'"><img src="'.api_get_path(WEB_CODE_PATH).'img/edit.gif" align="absmiddle" alt="'.get_lang("Edit").'"/></a>';
+				}
+
+			}
+			
+			// Both checks are necessary as is_platform_admin doesn't take student view into account
+			if( $is_platform_admin && $is_allowed_to_edit) 
+			{
+ 				if($toolsRow['admin'] !='1')
+				{
+					$link['cmd'] = "hide=yes";
+
+				}
+
+			}
+
+			if(isset($lnk) && is_array($lnk))
+			{
+				foreach($lnk as $this_link)
+				{
+					if(empty($toolsRow['adminlink']))
+					{
+							echo "<a href=\"" .api_get_self(). "?".api_get_cidreq()."&amp;id=" . $toolsRow["id"] . "&amp;" . $this_link['cmd'] . "\">" .	$this_link['name'] . "</a>";
+					}
+				}
+			}
+			else{ echo '&nbsp;&nbsp;&nbsp;&nbsp;';}
+
+			// NOTE : table contains only the image file name, not full path
+			if(!stristr($toolsRow['link'], 'http://') && !stristr($toolsRow['link'], 'https://') && !stristr($toolsRow['link'],'ftp://'))
+				$toolsRow['link'] = $web_code_path . $toolsRow['link'];
+
+			if($toolsRow['visibility'] == '0' && $toolsRow['admin'] != '1')
+			{
+			  	$class="class=\"invisible\"";
+			  	$info = pathinfo($toolsRow['image']);
+			  	$basename = basename ($toolsRow['image'],'.'.$info['extension']); // $file is set to "index"
+				$toolsRow['image'] = $basename.'_na.'.$info['extension'];
+			}
+ 			else
+				$class='';
+
+			$qm_or_amp = ((strpos($toolsRow['link'], '?') === FALSE) ? '?' : '&amp;');
+			//If it's a link, we don't add the cidReq
+			if($toolsRow['image'] == 'file_html.gif' || $toolsRow['image'] == 'file_html_na.gif'){
+				$toolsRow['link'] = $toolsRow['link'].$qm_or_amp;
+			}
+			else{
+				$toolsRow['link'] = $toolsRow['link'].$qm_or_amp.api_get_cidreq();
+			}
+				if(strpos($toolsRow['name'],'visio_')!==false){
+					echo "\t" . ' &nbsp <a ' . $class . ' href="#" onclick="window.open(\'' . htmlspecialchars($toolsRow['link']) . '\',\'window_visio\',config=\'height=\'+730+\', width=\'+1020+\', left=2, top=2, toolbar=no, menubar=no, scrollbars=yes, resizable=yes, location=no, directories=no, status=no\')" target="' . $toolsRow['target'] . '">&nbsp;&nbsp;';
+				}
+				else {
+					echo "\t" . ' &nbsp <a ' . $class . ' href="' . htmlspecialchars($toolsRow['link']) . '" target="' . $toolsRow['target'] . '">&nbsp;&nbsp;';
+				}
+					echo '<img src="' . $web_code_path . 'img/' . $toolsRow['image'] . '" align="absmiddle" border="0" alt="' . $toolsRow['image'] . '" /> &nbsp;&nbsp;';
+$ServTecnico = "Servicio Técnico";	
+					echo ($toolsRow['image'] == 'file_html_na.gif' || $toolsRow['image'] == 'file_html.gif' || $toolsRow['image'] == 'scormbuilder.gif' || $toolsRow['image'] == 'scormbuilder_na.gif' || $toolsRow['image'] == 'blog.gif' || $toolsRow['image'] == 'blog_na.gif' || $toolsRow['image'] == 'external.gif' || $toolsRow['image'] == 'external_na.gif') ? '  '.stripslashes($toolsRow['name']) : '  '.get_lang(ucfirst($toolsRow['name']));
+				echo "\t" . '</a>';
+				echo '</td>';
+			if($i%2)
+			{
+				echo "</tr>";
+			}
+
+			$i++;
+		}
+	}
+
+	if($i%2)
+	{
+		echo	"<td width=\"50%\">&nbsp;</td>\n",
+				"</tr>\n";
+	}
+
+}
+
+//End of functions show tools
+
+/*
+==============================================================================
+		MAIN CODE
+==============================================================================
+*/
+/*
+-----------------------------------------------------------
+	Work with data post askable by admin of course (franglais, clean this)
+-----------------------------------------------------------
+*/
+if(api_is_allowed_to_edit())
+{
+ 	/*
+	-----------------------------------------------------------
+		HIDE
+	-----------------------------------------------------------
+	*/
+	if(!empty($_GET['hide'])) // visibility 1 -> 0
+	{
+		api_sql_query("UPDATE $tool_table SET visibility=0 WHERE id='".$_GET["id"]."'",__FILE__,__LINE__);
+		Display::display_confirmation_message(get_lang('ToolIsNowHidden'));
+	}
+
+  /*
+	-----------------------------------------------------------
+		REACTIVATE
+	-----------------------------------------------------------
+	*/
+	elseif(!empty($_GET['restore'])) // visibility 0,2 -> 1
+	{
+		api_sql_query("UPDATE $tool_table SET visibility=1 WHERE id='".$_GET["id"]."'",__FILE__,__LINE__);
+		Display::display_confirmation_message(get_lang('ToolIsNowVisible'));
+	}
+}
+
+// work with data post askable by admin of course
+
+if(api_is_platform_admin())
+{
+	// Show message to confirm that a tools must be hide from available tools
+	// visibility 0,1->2
+	if(!empty($_GET['askDelete']))
+	{
+		?>
+			<div id="toolhide">
+			<?php echo get_lang("DelLk")?>
+			<br />&nbsp;&nbsp;&nbsp;
+			<a href="<?php echo api_get_self()?>"><?php echo get_lang("No")?></a>&nbsp;|&nbsp;
+			<a href="<?php echo api_get_self()?>?delete=yes&id=<?php echo $_GET["id"]?>"><?php echo get_lang("Yes")?></a>
+			</div>
+		<?php
+	}
+
+	/*
+	 * Process hiding a tools from available tools.
+	 */
+
+	elseif(isset($_GET["delete"]) && $_GET["delete"])
+	{
+		api_sql_query("DELETE FROM $tool_table WHERE id='$id' AND added_tool=1",__FILE__,__LINE__);
+	}
+}
+
+
+
+/*
+==============================================================================
+		COURSE ADMIN ONLY VIEW
+==============================================================================
+*/
+//pagina del administrador de la plataforma se añade para poder mostrar diferente contenidos
+//para administradores de plataforma y tutores
+if(api_is_platform_admin())
+{
+	?>
+	<div class="courseadminview">
+		<span class="viewcaption"><?php echo get_lang("Authoring") ?></span>
+		<table width="100%">
+			<?php show_tools_category(TOOL_AUTHORING);?>
+		</table>
+	</div>
+	<div class="courseadminview">
+		<span class="viewcaption"><?php echo get_lang("Interaction") ?></span>
+		<table width="100%">
+			<?php show_tools_category(TOOL_INTERACTION); ?>
+		</table>
+	</div>
+	<div class="courseadminview">
+		<span class="viewcaption"><?php echo get_lang("Administration") ?></span>
+		<table width="100%">
+			<?php show_tools_category(TOOL_ADMIN_PLATEFORM); ?>
+		</table>
+	</div>
+		<div class="courseadminview">
+			<table width="100%">
+				<?php show_tools_category(TOOL_NINGUNA); ?>
+			</table>
+		</div>
+
+	<?php
+
+}
+else
+{
+  //cambio fd - si se trata de un responsable de recursos humanos (inspector)
+   if($_SESSION["_user"]["status"]==4){
+   
+            ?>
+				<div class="courseadminview">
+					<span class="viewcaption"><?php echo get_lang("Authoring") ?></span>
+					<table width="100%">
+						<?php show_tools_category(TOOL_AUTHORING_INSPECTOR);?>
+					</table>
+				</div>
+				<div class="courseadminview">
+					<span class="viewcaption"><?php echo get_lang("Interaction") ?></span>
+					<table width="100%">
+						<?php show_tools_category(TOOL_INTERACTION_INSPECTOR); ?>
+					</table>
+				</div>
+				<div class="courseadminview">
+			         <span class="viewcaption"><?php echo get_lang("Administration") ?></span>
+			            <table width="100%">
+				              <?php show_tools_category(TOOL_ADMIN_PLATFORM_INSPECTOR); ?>
+			            </table>
+	            </div>
+			<?php
+   
+   
+   }else{
+
+	// start of tools for CourseAdmins (teachers/tutors)
+	//Esta parte es toda nueva para mostrar las herramientas que ve el tutor.
+	if(api_is_allowed_to_edit())
+	{
+		?>
+		<div class="courseadminview">
+			<span class="viewcaption"><?php echo get_lang("Authoring") ?></span>
+			<table width="100%">
+				<?php show_tools_category(TOOL_AUTHORING_TUTOR);?>
+			</table>
+		</div>
+		<div class="courseadminview">
+			<span class="viewcaption"><?php echo get_lang("Interaction") ?></span>
+			<table width="100%">
+				<?php show_tools_category(TOOL_INTERACTION_TUTOR); ?>
+			</table>
+		</div>
+		<div class="courseadminview">
+			<span class="viewcaption"><?php echo get_lang("Administration") ?></span>
+			<table width="100%">
+				<?php show_tools_category(TOOL_ADMIN_PLATEFORM_TUTOR); ?>
+			</table>
+		</div>
+		<div class="courseadminview">
+			<table width="100%">
+				<?php show_tools_category(TOOL_NINGUNA_TUTOR); ?>
+			</table>
+		</div>
+
+		<?php
+	}
+
+/*
+==============================================================================
+		TOOLS AUTHORING
+==============================================================================
+*/
+	else{
+	?>
+		<div class="courseadminview">
+			<span class="viewcaption"><?php echo get_lang("Authoring") ?></span>
+			<table width="100%">
+				<?php show_tools_category(TOOL_STUDENT_AUTHORING);?>
+			</table>
+		</div>
+		<div class="courseadminview">
+			<span class="viewcaption"><?php echo get_lang("Interaction") ?></span>
+			<table width="100%">
+				<?php show_tools_category(TOOL_STUDENT_INTERACTION); ?>
+			</table>
+		</div>
+		<div class="courseadminview">
+			<table width="100%">
+				<?php show_tools_category(TOOL_STUDENT_NINGUNA); ?>
+			</table>
+		</div>
+	<?php
+	}
+}
+}
+?>

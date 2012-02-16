@@ -1,0 +1,56 @@
+<?php /*
+for more information: see languages.txt in the lang folder. 
+*/
+$AgendaAdd = "Adicionar novo Ítem na Agenda";
+$ShowAll = "Mostrar Todos os Ítens da Agenda";
+$ShowCurrent = "Mostrar Ítens da Agenda pra o mês atual";
+$AddCalendarItem = "Adicionar um novo ítem na Agenda";
+$Day = "Dia";
+$Month = "Mês";
+$Year = "Ano";
+$Hour = "Hora";
+$Minutes = "Minutos";
+$Detail = "Detalhe";
+$EditSuccess = "A ítem da agenda foi editado";
+$AddSuccess = "Ítem adicionado na agenda";
+$AgendaDeleteSuccess = "O ítem da agenda foi apagado";
+$NoAgendaItems = "Não há Ítens na Agenda";
+$lang_september = "Setembro";
+$langClassName = "Nome da turma";
+$lang_agenda = "Agenda";
+$ModifyCalendarItem = "Modificar um ítem da Agenda";
+$ItemTitle = "Título do ítem";
+$langDay = "dia";
+$month_default = "mês padrão";
+$langYear = "Ano";
+$year_default = "ano padrão";
+$langHour = "Hora";
+$hour_default = "hora padrão";
+$langMinute = "minuto";
+$langLasting = "faltando";
+$langOldToNew = "antigo para novo";
+$langNewToOld = "novo para antigo";
+$langNow = "agora";
+$langAddEvent = "Adicionar um evento";
+$langDetail = "detalhe";
+$MonthView = "Visualizar Mês";
+$WeekView = "Visualizar Semana";
+$DayView = "Visualizar Dia";
+$AddPersonalItem = "Adicionar item personalizado";
+$Week = "Semana";
+$Date = "Data";
+$Time = "Horário";
+$AddPersonalCalendarItem = "Adicionar um ítem personalizado na Agenda";
+$ModifyPersonalCalendarItem = "Alterar um ítem personalizado da Agenda";
+$PeronalAgendaItemAdded = "Seu ítem personalizado da Agenda foi adicionado com sucesso";
+$PeronalAgendaItemEdited = "Seu ítem pessoal da agenda foi editado com sucesso";
+$PeronalAgendaItemDeleted = "Seu ítem pessoal da agenda foi apagado com sucesso";
+$ViewPersonalItem = "Visualizar ítens pessoais";
+$UserGroupFilter = "Filtrar por grupos/usuários";
+$ShowAll = "Mostrar Tudo";
+$Print = "Imprimir";
+$CopiedAsAnnouncement = "Copiado como anúncio";
+$NewAnnouncement = "Novo anúncio";
+$AddAnnouncement = "Acrescentado como anúncio";
+$UpcomingEvent = "Próximo Evento";
+?>

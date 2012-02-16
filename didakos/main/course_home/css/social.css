@@ -1,0 +1,238 @@
+
+BODY { 
+	margin: 10 0 10 0px; 
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color: #4a4c4d;
+	background:#ffffff;
+} 
+
+div.cuerpo{ 
+	background:#efefef;
+	width: 50%;
+	border-radius:2px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius : 5px;
+	float:left; 
+} 
+
+div.lateral{ 
+	
+	background:#adccd8;
+	width: 50%;
+	border-radius:2px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius : 5px;
+	float:right; 
+
+} 
+
+p.panel {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color: #4a4c4d;
+}
+#lateral_box {
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+}
+div.no_social {
+	padding-left: 20px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+
+}
+#inferior_box {
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	float:left;
+	width: 90%;
+
+}
+#sp_ContenedorGestor{
+	float:left;
+	width: 100%;
+	background: #dddddd;
+}
+
+#sp_ContenedorAlumno{
+	float:left;
+	width: 100%;
+}
+#sp_ContenedorSocial{
+	float:left;
+	width: 100%;
+	background: #ffffff;
+}
+
+#sp_foto{
+	float:left;
+	width: 20%;
+}
+#sp_lineas{
+	float:left;
+	width: 80%;	
+}
+
+#linea1 {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #000000;
+
+}
+#linea2 {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #6d6d6d;
+
+}
+#linea3 {
+
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #000000;
+}
+#linea {
+	float:left;
+	width: 100%;
+	border-top: 1px dashed #ffffff;
+}
+
+#vermas {
+	float:right;
+	padding-right: 10px;
+}
+#inferior {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align:center;
+}
+
+#cabecera_der{
+	float:right;
+	width: 10%;
+
+
+}
+#cabecera_izq{
+	float:left;
+	width: 90%;
+	text-align:left;
+}
+
+a.Ntooltip {
+position: relative; /* es la posición normal */
+text-decoration: none !important; /* forzar sin subrayado */
+color:#ffffff !important; /* forzar color del texto */
+text-align:center;
+}
+
+a.Ntooltip:hover {
+z-index:999; /* va a estar por encima de todo */
+}
+
+a.Ntooltip span {
+display: none; /* el elemento va a estar oculto */
+
+
+
+}
+
+a.Ntooltip:hover span {
+display: block; /* se fuerza a mostrar el bloque */
+position: absolute; /* se fuerza a que se ubique en un lugar de la pantalla */
+top:-40px; left:0px; /* donde va a estar */
+width:130px; /* el ancho por defecto que va a tener */
+padding:5px; /* la separación entre el contenido y los bordes */
+background-color: #efefef; /* el color de fondo por defecto */
+color: #000000; /* el color de los textos por defecto */
+border-radius:5px;
+-moz-border-radius: 5px;
+-webkit-border-radius : 5px;
+}
+
+div.taskbar{
+	height:30px;
+	width:400px;
+	position: fixed;
+	left: 50%;
+	margin-left: -200px;
+   	top: 0;
+   	z-index: 99;
+	background-image: url('../../../main/course_home/img/barra.gif');
+}
+div.taskbar div.container{
+	display:block;
+	margin-left:40px;
+	margin-right:40px;
+	height:30px;
+}
+
+/*------- blocks btns --------*/
+
+div.taskbar div.container div.block{
+	position:relative;
+	width: 50px;
+	height:30px;	
+   	display:inline-block;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:16px;
+	color:#910101;
+	font-weight:bold;
+	cursor:pointer;
+}
+
+div.taskbar div.desplegable
+{
+	display:block;
+	margin-left:20px;
+	margin-right:20px;
+	height:200px;
+	background-color: #fefefe;
+	border-right: 1px solid #aaaaaa;   
+   	border-bottom: 1px solid #aaaaaa;
+   	border-left: 1px solid #aaaaaa;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+}
+
+table.notificaciones
+{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 10px;
+	color: #404040;
+	width: 340px;
+	background-color: #fefefe;
+}
+
+td.notificacion_resaltada
+{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #FFFFCC;
+
+	
+}
+td.notificacion_normal
+{
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+

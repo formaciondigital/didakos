@@ -1,0 +1,36 @@
+<?php
+
+// Especificos redes sociales
+
+$VerMas = "***Ver más";
+$TotalIgnoradas = "***Total ignoradas";
+$OtrosAlumnos = "***Otros alumnos";
+$EditarPreferencias = "***Editar preferencias";
+$HerramientasIgnoradas = "***Herramientas ignoradas";
+$EditarPreferencias = "***Editar preferencias";
+$ContenidoMultimedia = "***Contenido multimedia";
+$Elemento = "***Elemento";
+$Progreso = "***Progreso";
+$Examenes = "***Exámenes";
+$Examen = "***Examen";
+$Calificacion = "***Calificación";
+$OtrasHerramientas = "***Otras herramientas";
+$Configuracion = "***Configuración";
+$ConfigurarPanel = "***Configurar panel";
+$ServicioTecnico = "***Servicio técnico";
+$HaObtenidoUn = "***Ha obtenido un";
+$EnElExamen = "***en el examen";
+$EnElEjercicio = "***en el ejercicio";
+$ConectadoCurso = "***Conectado curso";
+$ConectadoChat = "***Conectado chat";
+$DesconectadoChat = "***Desconectado chat";
+$CorreoSinLeerDe = "***Correo sin leer de";
+$Hace = "***Hace";
+$HaceUnosInstantes = "***Hace unos instantes";
+$HaceMuchoTiempo = "***Hace mucho tiempo";
+$Hora = "***Hora";
+$Horas = "***Horas";
+$Minutos = "***Minutos";
+$Dia = "***Día";
+$Dias = "***Dias";
+$Anuncio = 

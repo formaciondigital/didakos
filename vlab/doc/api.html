@@ -1,0 +1,480 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API &mdash; Virtual Labs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Virtual Labs 1.0 documentation" href="index.html" />
+    <link rel="next" title="Tests" href="tests.html" />
+    <link rel="prev" title="Introducción" href="intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tests.html" title="Tests"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introducción"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Virtual Labs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api">
+<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">February 16, 2012</td>
+</tr>
+</tbody>
+</table>
+<p>En los siguienes apartados vamos a definir la interfaz que se utilizará para realizar operaciones
+con máquinas virtuales, así como algunas consideraciones previas que deberemos tener en cuenta.</p>
+<div class="section" id="consideraciones-de-seguridad">
+<h2>Consideraciones de seguridad<a class="headerlink" href="#consideraciones-de-seguridad" title="Permalink to this headline">¶</a></h2>
+<p>Las peticiones a la API se realizarán a través del protocolo https. Para garantizar que las peticiones
+únicamente son realizadas desde los clientes autorizados, vamos a utilizar la negociación de los certificados
+en la sesión SSL como medida de protección. Esto quiere decir que el servidor web que procesará las peticiones
+a estas urls verificará que el cliente esté utilizando un certificado expedido por la autoridad certificadora
+en cuestión. Es importante igualmente que el cliente verifique que el certificado que usa el servidor web
+también proviene de una autoridad certificadora de confianza.</p>
+<p>Se expedirán tres juegos de certificados, uno por cada zona. Las zonas seran: administración, zona privada
+(de acceso restringido a los apache) y zona publica (donde las máquinas virtuales notificarán su estado).</p>
+<p>Para poder implementar esta estructura de certificados en el servidor ha sido necesario dividir la aplicación
+en tres partes, para asignar a cada una su certificado. Las urls para cada parte son:</p>
+<ul>
+<li><p class="first">Zona pública</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">https://api.sudominio.com</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">Administración</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">https://api_admin.sudominio.com</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">Zona privada</p>
+<blockquote>
+<div><p><tt class="docutils literal"><span class="pre">https://api_private.sudominio.com</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="creacion-de-una-nueva-maquina-virtual">
+<span id="new"></span><h2>Creación de una nueva máquina virtual<a class="headerlink" href="#creacion-de-una-nueva-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descname">https://api_private.sudominio.com/vlab/api/new/PETICION_ID/MINUTOS/MAQUINA_ID/EMAIL/ZONE/</tt></dt>
+<dd></dd></dl>
+
+<p>Esta url permite crear máquinas virtuales. Esta petición debe ser lanzada cuando el alumno
+decide comenzar una práctica.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si no se respetan los parámetros exactamente tal y como se refleja en la documentación
+la petición será rechazada y la conexión devolverá un error 404 (página no encontrada)</p>
+</div>
+<p><strong>Parámetros:</strong></p>
+<ul>
+<li><p class="first">PETICION_ID: [10 dígitos]</p>
+<blockquote>
+<div><p>Este identificador lo definirá el autor de la petición, y será su vínculo de comunicación
+con la máquina asociada a esta petición. Cualquier operación relacionada con alguna máquina
+virtual deberá venir acompañada de este identificador. Dicho identificador estará constituido
+únicamente por números (10), y cada máquina virtual debe contar únicamente con uno.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">0123456789</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">MINUTOS: [3 dígitos]</p>
+<blockquote>
+<div><p>Tiempo que permanecerá activa la máquina virtual expresado en minutos. Cuando se crea una máquina
+virtual es preciso indicar el tiempo que la máquina deberá permanecer activa. Este tiempo está
+indicado en minutos, y debe ser un valor de 3 dígitos. En el caso de que la cantidad sea inferior a
+cien, debe completarse con ceros la parte de la izquiera hasta llegar a los tres dígitos (090, por
+ejemplo). <em>Tiempo máximo: 235 minutos. Tiempo mínimo: 15 minutos.</em></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">120</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">MAQUINA_ID: [10 dígitos]</p>
+<blockquote>
+<div><p>Este identificador hace referencia al tipo de máquina virtual que queremos lanzar. El listado de
+identificadores válidos se puede obtener tanto desde la interfaz de administración (pendiente de
+documentar) como haciendo uso del método list descrito más abajo.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">0123456789</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">EMAIL: [string]&#64;[string].[string]</p>
+<blockquote>
+<div><p>Este identificador hace referencia al email al que se deben notificar los cambios en la  máquina
+virtual que queremos lanzar.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">nombrealumno&#64;dominio.es</span></tt></p>
+</div></blockquote>
+</li>
+<li><p class="first">ZONE: [9 caracteres]</p>
+<blockquote>
+<div><p>Este identificador hace referencia a la zona en la que se debe crear la máquina virtual que queremos
+lanzar. El parametro es opcional, si se indica la zona la máquina se lanzará en dicha zona, sino,
+la máquina se lanzará teniendo en cuenta el orden de prioridad establecido en la administracion.
+En las plataformas LATAM es importante que se utilice este parámetro y que se establezca el valor
+de la zona a us-west-1.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">us-west-1</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<ul>
+<li><p class="first">ESTADO_PETICION: formato JSON</p>
+<blockquote>
+<div><p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;OK&quot;,&quot;reason&quot;:&quot;&quot;}</span></tt></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;MAQUINA_ID</span> <span class="pre">no</span> <span class="pre">valido&quot;}</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Ejemplo de creación de una nueva máquina virtual:</strong></p>
+<p><tt class="docutils literal"><span class="pre">https://api_private.sudominio.com/vlab/api/new/0000000001/180/1111122222/nombrealumno&#64;dominio.es/</span></tt></p>
+</div>
+<div class="section" id="notificacion-de-inicio-de-maquina-virtual">
+<span id="launch"></span><h2>Notificación de inicio de máquina virtual<a class="headerlink" href="#notificacion-de-inicio-de-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descname">https://api.sudominio.com/vlab/api/launched/PETICION_ID/</tt></dt>
+<dd></dd></dl>
+
+<p>Haciendo uso de esta url una máquina virtual podrá notificar al sistema que ha sido iniciada
+con éxito. Desde este momento estará accesible al usuario. Al recibir esta notificación el
+sistema informará al emisor de la solicitud original para que pueda tomar las acciones que
+considere necesarias (haciendo uso de la callback_url). Se notificará al usuario mediante email
+de que la máquina esta disponible, y se le adjuntarán sus datos de acceso.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si no se respetan los parámetros exactamente tal y como se refleja en la documentación
+la petición será rechazada y la conexión devolverá un error 404 (página no encontrada)</p>
+</div>
+<p><strong>Parámetros:</strong></p>
+<ul>
+<li><p class="first">PETICION_ID: [10 dígitos]</p>
+<blockquote>
+<div><p>Este identificador lo definirá el autor de la petición, y será su vínculo de comunicación
+con la máquina asociada a esta petición. Cualquier operación relacionada con alguna máquina
+virtual deberá venir acompañada de este identificador. Dicho identificador estará constituido
+únicamente por números (10), y cada máquina virtual debe contar únicamente con uno.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">0123456789</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<ul>
+<li><p class="first">ESTADO_PETICION: formato JSON</p>
+<blockquote>
+<div><p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;OK&quot;,</span> <span class="pre">&quot;reason&quot;:&quot;&quot;}</span></tt></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;PETICION_ID</span> <span class="pre">no</span> <span class="pre">valido&quot;}</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Ejemplo de notificación de inicio de una máquina virtual:</strong></p>
+<p><tt class="docutils literal"><span class="pre">https://api.sudominio.com/vlab/api/launched/0000000001/</span></tt></p>
+</div>
+<div class="section" id="detener-maquina-virtual">
+<span id="stop"></span><h2>Detener máquina virtual<a class="headerlink" href="#detener-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descname">https://api_private.sudominio.com/vlab/api/stop/PETICION_ID/</tt></dt>
+<dd></dd></dl>
+
+<p>Esta url permite detener máquinas virtuales. Por lo general esta url no debería ser invocada
+directamente, ya que las máquinas se pararán de forma automática una vez llegada su fecha
+programada de destrucción. No obstante, realizando esta petición es posible detener una máquina
+bajo demanda.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si no se respetan los parámetros exactamente tal y como se refleja en la documentación
+la petición será rechazada y la conexión devolverá un error 404 (página no encontrada)</p>
+</div>
+<p><strong>Parámetros:</strong></p>
+<ul>
+<li><p class="first">PETICION_ID: [10 dígitos]</p>
+<blockquote>
+<div><p>Este identificador lo definirá el autor de la petición, y será su vínculo de comunicación
+con la máquina asociada a esta petición. Cualquier operación relacionada con alguna máquina
+virtual deberá venir acompañada de este identificador. Dicho identificador estará constituido
+únicamente por números (10), y cada máquina virtual debe contar únicamente con uno.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">0123456789</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<ul>
+<li><p class="first">ESTADO_PETICION: formato JSON</p>
+<blockquote>
+<div><p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;OK&quot;,&quot;reason&quot;:&quot;&quot;}</span></tt></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;PETICION_ID</span> <span class="pre">no</span> <span class="pre">valido&quot;}</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Ejemplo de parada de una máquina virtual:</strong></p>
+<p><tt class="docutils literal"><span class="pre">https://api_private.sudominio.com/vlab/api/stop/0000000001/</span></tt></p>
+</div>
+<div class="section" id="notificacion-de-parada-de-maquina-virtual">
+<span id="stopped"></span><h2>Notificación de parada de máquina virtual<a class="headerlink" href="#notificacion-de-parada-de-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descname">https://api.sudominio.com/vlab/api/stopped/PETICION_ID/</tt></dt>
+<dd></dd></dl>
+
+<p>Haciendo uso de esta url una máquina virtual podrá notificar al sistema que ha sido detenida
+con éxito. Desde este momento la máquina NO estará accesible al usuario. Al recibir esta notificación el
+sistema informará al emisor de la solicitud original para que pueda tomar las acciones que
+considere necesarias (haciendo uso de la callback_url). Además el usuario recibirá una notificación
+mediante email de que la máquina se ha parado.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si no se respetan los parámetros exactamente tal y como se refleja en la documentación
+la petición será rechazada y la conexión devolverá un error 404 (página no encontrada)</p>
+</div>
+<p><strong>Parámetros:</strong></p>
+<ul>
+<li><p class="first">PETICION_ID: [10 dígitos]</p>
+<blockquote>
+<div><p>Este identificador lo definirá el autor de la petición, y será su vínculo de comunicación
+con la máquina asociada a esta petición. Cualquier operación relacionada con alguna máquina
+virtual deberá venir acompañada de este identificador. Dicho identificador estará constituido
+únicamente por números (10), y cada máquina virtual debe contar únicamente con uno.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">0123456789</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<ul>
+<li><p class="first">ESTADO_PETICION: formato JSON</p>
+<blockquote>
+<div><p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;OK&quot;,</span> <span class="pre">&quot;reason&quot;:&quot;&quot;}</span></tt></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;PETICION_ID</span> <span class="pre">no</span> <span class="pre">valido&quot;}</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Ejemplo de notificación de parada de una máquina virtual:</strong></p>
+<p><tt class="docutils literal"><span class="pre">https://api.sudominio.com/vlab/api/stopped/0000000001/</span></tt></p>
+</div>
+<div class="section" id="notificacion-de-estado-de-maquina-virtual">
+<span id="imalive"></span><h2>Notificación de estado de máquina virtual<a class="headerlink" href="#notificacion-de-estado-de-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descname">https://api.sudominio.com/vlab/api/imalive/PETICION_ID/</tt></dt>
+<dd></dd></dl>
+
+<p>Haciendo uso de esta url una máquina virtual podrá notificar al sistema que ha su estado es online
+con éxito.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si no se respetan los parámetros exactamente tal y como se refleja en la documentación
+la petición será rechazada y la conexión devolverá un error 404 (página no encontrada)</p>
+</div>
+<p><strong>Parámetros:</strong></p>
+<ul>
+<li><p class="first">PETICION_ID: [10 dígitos]</p>
+<blockquote>
+<div><p>Este identificador lo definirá el autor de la petición, y será su vínculo de comunicación
+con la máquina asociada a esta petición. Cualquier operación relacionada con alguna máquina
+virtual deberá venir acompañada de este identificador. Dicho identificador estará constituido
+únicamente por números (10), y cada máquina virtual debe contar únicamente con uno.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">0123456789</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<ul>
+<li><p class="first">ESTADO_PETICION: formato JSON</p>
+<blockquote>
+<div><p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;OK&quot;,</span> <span class="pre">&quot;reason&quot;:&quot;&quot;}</span></tt></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;PETICION_ID</span> <span class="pre">no</span> <span class="pre">valido&quot;}</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Ejemplo de notificación de estado de una máquina virtual:</strong></p>
+<p><tt class="docutils literal"><span class="pre">https://api.sudominio.com/vlab/api/imalive/0000000001/</span></tt></p>
+</div>
+<div class="section" id="informacion-sobre-una-maquina-virtual">
+<span id="info"></span><h2>Información sobre una máquina virtual<a class="headerlink" href="#informacion-sobre-una-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descname">https://api_private.sudominio.com/vlab/api/info/PETICION_ID/</tt></dt>
+<dd></dd></dl>
+
+<p>Esta url permite obtener información sobre una máquina virtual. Gracias a ella se podrá
+obtener el estado actual (ejecutándose, parada, etc), recoger las credenciales necesarias
+para que un usuario pueda conectarse a ella, etc.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si no se respetan los parámetros exactamente tal y como se refleja en la documentación
+la petición será rechazada y la conexión devolverá un error 404 (página no encontrada)</p>
+</div>
+<p><strong>Parámetros:</strong></p>
+<ul>
+<li><p class="first">PETICION_ID: [10 dígitos]</p>
+<blockquote>
+<div><p>Este identificador lo definirá el autor de la petición, y será su vínculo de comunicación
+con la máquina asociada a esta petición. Cualquier operación relacionada con alguna máquina
+virtual deberá venir acompañada de este identificador. Dicho identificador estará constituido
+únicamente por números (10), y cada máquina virtual debe contar únicamente con uno.</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">0123456789</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<ul>
+<li><p class="first">INFORMACIÓN MÁQUINA o ESTADO PETICION: formato JSON</p>
+<blockquote>
+<div><p>Formato: JSON([instance,keypair,request,ami])</p>
+<p>Es posible consultar los campos que contienen cada uno de estos objetos en la documentación interna,
+en la sección de modelos (<a class="reference internal" href="internal.html#models"><em>Models</em></a>).</p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">[{&quot;pk&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;model&quot;:</span> <span class="pre">&quot;api.instance&quot;,</span> <span class="pre">&quot;fields&quot;:</span> <span class="pre">{&quot;ami&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;real_termination_date&quot;:</span> <span class="pre">null,</span> <span class="pre">&quot;request&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;state&quot;:</span> <span class="pre">&quot;running&quot;,</span> <span class="pre">&quot;creation_date&quot;:</span> <span class="pre">&quot;2010-04-21</span> <span class="pre">18:31:40&quot;,</span> <span class="pre">&quot;instance_id&quot;:</span> <span class="pre">&quot;i-30b80447&quot;,</span> <span class="pre">&quot;estimated_termination_date&quot;:</span> <span class="pre">null,</span> <span class="pre">&quot;keypair&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;public_dns_name&quot;:</span> <span class="pre">&quot;ec2-79-125-42-186.eu-west-1.compute.amazonaws.com&quot;,</span> <span class="pre">&quot;type&quot;:</span> <span class="pre">&quot;m1.small&quot;}},</span> <span class="pre">{&quot;pk&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;model&quot;:</span> <span class="pre">&quot;api.keypair&quot;,</span> <span class="pre">&quot;fields&quot;:</span> <span class="pre">{&quot;region&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;creation_date&quot;:</span> <span class="pre">&quot;2010-04-21</span> <span class="pre">17:39:17&quot;,</span> <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;0000000001&quot;,</span> <span class="pre">&quot;key&quot;:</span> <span class="pre">&quot;-----BEGIN</span> <span class="pre">RSA</span> <span class="pre">PRIVATE</span> <span class="pre">KEY-----\nMIIEowIBAAKCAQEA184Kpxhmanq1Os45hTq06pdWCFglxMc1YqcfLur0GGUu...&quot;,</span> <span class="pre">&quot;fingerprint&quot;:</span> <span class="pre">&quot;f3:50:7b:cf:29:51:e8:66:21:12:7a:e3:1f:4f:00:15:11:84:16:cc&quot;}},</span> <span class="pre">{&quot;pk&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;model&quot;:</span> <span class="pre">&quot;api.request&quot;,</span> <span class="pre">&quot;fields&quot;:</span> <span class="pre">{&quot;sir_id&quot;:</span> <span class="pre">&quot;sir-66225609&quot;,</span> <span class="pre">&quot;ext_id&quot;:</span> <span class="pre">&quot;0000000001&quot;,</span> <span class="pre">&quot;completed&quot;:</span> <span class="pre">false,</span> <span class="pre">&quot;request_type&quot;:</span> <span class="pre">&quot;new&quot;,</span> <span class="pre">&quot;time&quot;:</span> <span class="pre">120,</span> <span class="pre">&quot;callback_url&quot;:</span> <span class="pre">null,</span> <span class="pre">&quot;virtual_ami&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;region&quot;:</span> <span class="pre">1}},</span> <span class="pre">{&quot;pk&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;model&quot;:</span> <span class="pre">&quot;api.ami&quot;,</span> <span class="pre">&quot;fields&quot;:</span> <span class="pre">{&quot;region&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;virtual_ami&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;ami-087a517c&quot;}}]</span></tt></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;PETICION_ID</span> <span class="pre">no</span> <span class="pre">valido&quot;}</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Ejemplo de consulta de información sobre una máquina virtual:</strong></p>
+<p><tt class="docutils literal"><span class="pre">https://api.sudominio.com/vlab/api/info/0000000001/</span></tt></p>
+</div>
+<div class="section" id="listado-de-tipos-de-maquinas-virtuales-disponibles">
+<span id="list"></span><h2>Listado de tipos de máquinas virtuales disponibles<a class="headerlink" href="#listado-de-tipos-de-maquinas-virtuales-disponibles" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descname">https://api_private.sudominio.com/vlab/api/list/</tt></dt>
+<dd></dd></dl>
+
+<p>Mediante esta url podremos obtener un listado con todas los identificadores de los
+tipos de máquinas virtuales registrados en el sistema.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Si no se respetan los parámetros exactamente tal y como se refleja en la documentación
+la petición será rechazada y la conexión devolverá un error 404 (página no encontrada)</p>
+</div>
+<p><strong>Parámetros:</strong></p>
+<ul class="simple">
+<li>No recibe parámetros</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<ul>
+<li><p class="first">LISTADO MÁQUINAS VIRTUALES DISPONIBLES o ESTADO PETICION: formato JSON</p>
+<blockquote>
+<div><p>Ejemplo: <tt class="docutils literal"><span class="pre">[{&quot;pk&quot;:</span> <span class="pre">1,</span> <span class="pre">&quot;model&quot;:</span> <span class="pre">&quot;api.virtualami&quot;,</span> <span class="pre">&quot;fields&quot;:</span> <span class="pre">{&quot;name&quot;:</span> <span class="pre">&quot;0000000001&quot;,</span> <span class="pre">&quot;description&quot;:</span> <span class="pre">&quot;Primera</span> <span class="pre">pr\u00e1ctica</span> <span class="pre">Oracle</span> <span class="pre">11g</span> <span class="pre">&quot;}},</span> <span class="pre">{&quot;pk&quot;:</span> <span class="pre">2,</span> <span class="pre">&quot;model&quot;:</span> <span class="pre">&quot;api.virtualami&quot;,</span> <span class="pre">&quot;fields&quot;:</span> <span class="pre">{&quot;name&quot;:</span> <span class="pre">&quot;0000000002&quot;,</span> <span class="pre">&quot;description&quot;:</span> <span class="pre">&quot;Segunda</span> <span class="pre">pr\u00e1ctica</span> <span class="pre">Oracle</span> <span class="pre">11g&quot;}}]</span></tt></p>
+<p>Ejemplo: <tt class="docutils literal"><span class="pre">{&quot;status&quot;:&quot;ERROR&quot;,&quot;reason&quot;:&quot;Ha</span> <span class="pre">ocurrido</span> <span class="pre">un</span> <span class="pre">error&quot;}</span></tt></p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Ejemplo de consulta de información sobre todas las máquinas virtuales:</strong></p>
+<p><tt class="docutils literal"><span class="pre">https://api.sudominio.com/vlab/api/list/</span></tt></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API</a><ul>
+<li><a class="reference internal" href="#consideraciones-de-seguridad">Consideraciones de seguridad</a></li>
+<li><a class="reference internal" href="#creacion-de-una-nueva-maquina-virtual">Creación de una nueva máquina virtual</a></li>
+<li><a class="reference internal" href="#notificacion-de-inicio-de-maquina-virtual">Notificación de inicio de máquina virtual</a></li>
+<li><a class="reference internal" href="#detener-maquina-virtual">Detener máquina virtual</a></li>
+<li><a class="reference internal" href="#notificacion-de-parada-de-maquina-virtual">Notificación de parada de máquina virtual</a></li>
+<li><a class="reference internal" href="#notificacion-de-estado-de-maquina-virtual">Notificación de estado de máquina virtual</a></li>
+<li><a class="reference internal" href="#informacion-sobre-una-maquina-virtual">Información sobre una máquina virtual</a></li>
+<li><a class="reference internal" href="#listado-de-tipos-de-maquinas-virtuales-disponibles">Listado de tipos de máquinas virtuales disponibles</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">Introducción</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tests.html"
+                        title="next chapter">Tests</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tests.html" title="Tests"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introducción"
+             >previous</a> |</li>
+        <li><a href="index.html">Virtual Labs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dpto. Sistemas, Formación Digital.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

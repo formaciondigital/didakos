@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introducción &mdash; Virtual Labs 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Virtual Labs 1.0 documentation" href="index.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Documentación proyecto Virtual Labs" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Documentación proyecto Virtual Labs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Virtual Labs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduccion">
+<span id="intro"></span><h1>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Release:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">February 16, 2012</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="objetivo-del-proyecto">
+<h2>Objetivo del proyecto<a class="headerlink" href="#objetivo-del-proyecto" title="Permalink to this headline">¶</a></h2>
+<p>Nuestro negocio está enfocado principalmente a la teleformación. Contamos con una plataforma que sirve como base para que nuestros alumnos interactúen con todo el material que ponemos a su disposición: cursos multimedia, exámenes, ejercicios, herramientas de interacción con los miembros del curso (correo, foros, chat, agenda), podcasts, etc. Aunque este paquete formativo suele ser más que suficiente para muchas de las materias en las que solemos ofrecer formación, creemos que hay otras en las que un añadido podría resultar fundamental para que el aprovechamiento del curso -y en consecuencia la calidad de la formación- llegue a ser máximo.
+Pensemos en materias como cursos de ciertos sistemas operativos, o gestores de bases de datos. Todos los alumnos no cuentan con un equipo en el que puedan (o quieran) instalar un segundo sistema operativo, o quizás no sea lo suficientemente potente como para poder levantar la última versión de un potente gestor de bases de datos. Además, aún contando con el equipamiento necesario, no siempre resulta sencillo preparar el entorno para ir realizando pequeñas pruebas adecuadas al nivel de aprendizaje del alumno.
+Y aquí es donde hace acto de aparición el nuevo elemento formativo que queremos añadir a nuestros planes: el laboratorio virtual (virtual lab).</p>
+</div>
+<div class="section" id="en-que-consiste">
+<h2>En qué consiste<a class="headerlink" href="#en-que-consiste" title="Permalink to this headline">¶</a></h2>
+<p>La idea es sencilla. Cuando el alumno acceda a su plataforma de teleformación encontrará una nueva opción, los virtual labs. En este apartado el alumno dispondrá de un listado de prácticas, asociadas a los diferentes temas que compongan el curso. Cuando el alumno considere que está preparado para realizarlas, tan sólo deberá hacer click en el botón correspondiente y toda la maquinaría se pondrá en marcha. ¿Qué ocurrirá realmente? De forma transparente al usuario, el sistema localizará una imagen de una máquina que cuenta con todo lo necesario para que el alumno pueda realizar la práctica, sin tener que preparar absolutamente nada del entorno ni configurar nada. A efectos prácticos, en algún lugar del mundo se habrá preparado un servidor virtual que contará con todo lo que el alumno necesita, únicamente a su disposición. La máquina no sólo contará con el software necesario instalado, sino que éste también estará adecuado a cada situación particular: datos necesarios, configuraciones, etc. Una vez localizada, se iniciará una máquina con dicha imagen y se configurará lo necesario (todo de forma automática, casi instantáneo) para que el alumno pueda conectarse a ella de forma remota y realizar los ejercicios correspondientes. De hecho, al hacer click en la práctica correspondiente el alumno podrá visualizar los datos de conexión de la máquina, que estará disponible en escasos minutos (tiempo de arranque del sistema). Una vez concluida la práctica la máquina será destruida quedando los recursos que utilizaba liberados.</p>
+</div>
+<div class="section" id="implementacion">
+<h2>Implementación<a class="headerlink" href="#implementacion" title="Permalink to this headline">¶</a></h2>
+<p>Como es de suponer, son muchos los aspectos técnicos que hay que considerar a la hora de implementar un sistema de estas dimensiones. Veamos algunos de ellos.</p>
+<ul class="simple">
+<li><strong>Escalabilidad</strong>. Lo primero y más importante es contar con la infraestructura necesaria para poder ofrecer estos servicios, ya que los requisitos tanto es aspectos de hardware como en materia de comunicaciones serán muy elevados. La solución por la que nos hemos decantado es trabajar con determinados proveedores en &#8220;la nube&#8221;.</li>
+<li><strong>Comunicación entre los distintos componentes</strong>. En principio destaquemos principalmente dos componentes: las plataformas de teleformación y estas nuevas máquinas virtuales. Para abstraer al máximo el nuevo sistema de la plataforma de teleformación, y hacer que la posible migración a posibles nuevos proveedores de infraestructura sea lo más sencilla posible, vamos a desarrollar un componente (<a class="reference internal" href="api.html#api"><em>API</em></a>) intermedio que se encargará de la gestión de estas máquinas. Este componente ofrecerá un pequeño servicio web a las plataformas de teleformación para que éstas, bajo demanda, puedan solicitar la creación (<a class="reference internal" href="api.html#new"><em>Creación de una nueva máquina virtual</em></a>) y destrucción (<a class="reference internal" href="api.html#stop"><em>Detener máquina virtual</em></a>) de laboratorios cuando lo considere necesario (normalmente bajo demanda del usuario). También habrá que desarrollar el nuevo apartado en las plataformas de teleformación para que, haciendo uso del servicio mencionado anteriormente, puedan gestionar las necesidades de los alumnos de forma integrada en su habitual espacio de trabajo.</li>
+<li><strong>Moldes para la creación de máquinas</strong>. Cuando el alumno solicita realizar una práctica, el sistema debe levantar una máquina a partir de un molde. Quizás ésta sea una labor en la que debe de pesar más el aspecto pedagógico que el técnico, ya que es muy importante que cada uno de los moldes que vayamos creando se ajusten perfectamente a las necesidades formativas del alumno en cada momento (ajustarse a la línea de tiempo del curso, a los contenidos que se van mostrando en los cursos multimedia, etc). Para conseguir esto es importante que sean creados y configurados por expertos en la materia. Una vez listos, se integrarán con los componentes mencionados anteriormente para que el engranaje comience a funcionar de forma totalmente automatizada.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introducción</a><ul>
+<li><a class="reference internal" href="#objetivo-del-proyecto">Objetivo del proyecto</a></li>
+<li><a class="reference internal" href="#en-que-consiste">En qué consiste</a></li>
+<li><a class="reference internal" href="#implementacion">Implementación</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Documentación proyecto Virtual Labs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Documentación proyecto Virtual Labs"
+             >previous</a> |</li>
+        <li><a href="index.html">Virtual Labs 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Dpto. Sistemas, Formación Digital.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

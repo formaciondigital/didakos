@@ -1,0 +1,23 @@
+
+table.panel
+{
+	background-color:#ffffff;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: #333333;
+	width:50%;
+	text-align:left;
+}
+
+td.cabecera
+{
+	text-align:center;
+	background-color:#dedada;
+	border-width: 1px;
+	border-color: #ffffff;
+	font-weight: bold;
+}
+td.fila
+{
+	text-align:center;
+}

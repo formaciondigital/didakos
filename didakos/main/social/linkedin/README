@@ -1,0 +1,24 @@
+* INTRODUCTION *
+
+This library of php classes is created for connecting to the LinkedIn Api. As
+an example there is a folder example in this package. I distribute this under 
+the GNU GPL license. Please send me your comments, code reviews or wannahaves.
+
+You can contact me at w.peereboom@developmentit.com
+
+* INSTALL *
+
+1. To use these classes you have to setup a server with PHP 5 (www.php.net)
+
+2. These classes uses the pecl lib Oauth. Install these within your PHP extensions
+   commandline (l)unix: pecl install oauth-beta
+   
+3. Make sure sessions are enabled.   
+
+4. Add/Edit the /includes/config.php with your api key and customer key/secret
+   (I have descided to add the callback url in this config as well. If you entered
+   this in the linkedIn api registration you can leave this empty)
+   
+5. Open with a browser the /example/index.php file
+
+Pray everything is working ;)
