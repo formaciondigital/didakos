@@ -209,15 +209,25 @@ else
     if(isset($_POST['login']) && isset($_POST['password'])) // $login && $password are given to log in
     {
 					
-		$login = iconv("UTF-8","ISO-8859-1",$_POST['login']);
-		$password = $_POST['password'];
+		//$login = iconv("UTF-8","ISO-8859-1",$_POST['login']);
+        
+                $login = $_POST['login'];
+		
+                
+                if ($userPasswordCrypted)
+                {
+                	$password = md5($_POST['password']);
+                }else{
+                        $password = $_POST['password'];
+                }
+                
 
         //lookup the user in the main database
 		//CAMBIO - FD - se modifica la consulta para que filtre tambien por password por problemas con el login de los teletutores
 		$user_table = Database::get_main_table(TABLE_MAIN_USER);
         $sql = "SELECT user_id, username, password, auth_source, active, expiration_date
                 FROM $user_table
-                WHERE username = '".trim(addslashes($login))."' and  password = '".trim(addslashes($password))."'";
+                WHERE username = '".trim(mysql_real_escape_string($login))."' and  password = '".trim(mysql_real_escape_string($password))."'";
 
         $result = api_sql_query($sql,__FILE__,__LINE__);
 
@@ -234,11 +244,7 @@ else
                 // determine if the password needs to be encrypted before checking
                 // $userPasswordCrypted is set in an external configuration file
 
-                if ($userPasswordCrypted)
-                {
-                	$password = md5($password);
-                }
-                
+              
                 
                 // check the user's password
                 if ($password == $uData['password'] AND (trim($login) == $uData['username']))
