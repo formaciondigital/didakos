@@ -881,7 +881,7 @@ class CourseRestorer
 							"display_order = '".$item['display_order']."', " .
 							"prerequisite = '".Database::escape_string($item['prerequisite'])."', " .
 							"parameters='".Database::escape_string($item['parameters'])."', " .
-							"launch_data = '".Database::escape_string($item['launch_dataprereq_type'])."'";
+							"launch_data = '".$item['launch_data']."'";
 					api_sql_query($sql, __FILE__, __LINE__);
 					$new_item_id = Database::get_last_insert_id();
 					//save a link between old and new item IDs
