@@ -1,0 +1,17 @@
+msn_smiley.gif		:-)	:)
+msn_sad.gif			:-(	:(	:-<
+msn_laugh.gif		:-D	:-d	:d	:D	:->	:>
+msn_tongue.gif		:-P	:P	:-p	:p
+msn_wink.gif		;)	;-)
+msn_cry.gif			:'(
+msn_hot.gif			(H)	(h)
+msn_ooooh.gif		:-o
+msn_angry.gif		:-@	:@
+msn_nerd.gif		8-|
+msn_neutral.gif		:-|	:|
+msn_dontknow.gif	:^)
+msn_donttell.gif	:-#
+msn_eyeroll.gif		8-)
+msn_weird.gif		:-S	:-s	:s	:S
+msn_teeth.gif		8o|
+msn_think.gif		*-)
