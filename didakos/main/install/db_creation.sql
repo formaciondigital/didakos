@@ -22,6 +22,16 @@
 CREATE DATABASE IF NOT EXISTS {MYSQL_PREFIX}_main DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;;
 USE {MYSQL_PREFIX}_main;
 
+CREATE TABLE `{MYSQL_PREFIX}_main`.`fchat` (
+  `server` varchar(32) NOT NULL DEFAULT '',
+  `group` varchar(64) NOT NULL DEFAULT '',
+  `subgroup` varchar(128) NOT NULL DEFAULT '',
+  `leaf` varchar(128) NOT NULL DEFAULT '',
+  `leafvalue` text NOT NULL,
+  `timestamp` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`server`,`group`,`subgroup`,`leaf`),
+  KEY `server` (`server`,`group`,`subgroup`,`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- creacion de tablas para dispositivos moviles
 

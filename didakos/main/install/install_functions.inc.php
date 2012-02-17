@@ -537,6 +537,10 @@ function display_requirements($installType, $badUpdatePath, $updatePath='', $upd
 				<td class="requirements-item">didakos/home/</td>
 				<td class="requirements-value">'.check_writable('../home/').'</td>
 			</tr>
+                        <tr>
+				<td class="requirements-item">didakos/main/fchat</td>
+				<td class="requirements-value">'.check_writable('fchat/').'</td>
+			</tr>
 			';
 	echo '</table>';
 	echo '	</div>';
@@ -685,7 +689,7 @@ function display_license_agreement()
 {
 	echo '<h2>'.display_step_sequence().get_lang('Licence').'</h2>';
 	echo '<p>'.get_lang('DokeosLicenseInfo').'</p>';
-	echo '<p><a href="../../documentation/license.html">'.get_lang('PrintVers').'</a></p>';
+	echo '<p><a href="../../documentation/license.html" target="_blank">'.get_lang('PrintVers').'</a></p>';
 	?>
 	<table><tr><td>
 		<p><textarea cols="75" rows="15" ><?php htmlentities(include('../../documentation/license.txt')); ?></textarea></p>

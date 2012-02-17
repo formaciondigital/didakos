@@ -282,7 +282,7 @@ if(!isset($_GET['running']))
 	$allowSelfRegProf=0;
 	$enableTrackingForm=1;
 	$singleDbForm=0;
-	$encryptPassForm=1;
+	$encryptPassForm=0;
 	$session_lifetime=360000;
 }
 else

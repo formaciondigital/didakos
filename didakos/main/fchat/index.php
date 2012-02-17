@@ -44,7 +44,7 @@ include(dirname(__FILE__)."/src/phpfreechat.class.php");
 
 
 function limpiar_acentos($cadena){
-$tofind = "Ã€ÃÃ‚ÃƒÃ„Ã…Ã Ã¡Ã¢Ã£Ã¤Ã¥Ã’Ã“Ã”Ã•Ã–Ã˜Ã²Ã³Ã´ÃµÃ¶Ã¸ÃˆÃ‰ÃŠÃ‹Ã¨Ã©ÃªÃ«Ã‡Ã§ÃŒÃÃÃÃ¬Ã­Ã®Ã¯Ã™ÃšÃ›ÃœÃ¹ÃºÃ»Ã¼Ã¿";
+$tofind = "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿ";
 $replac = "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuy";
 return(strtr($cadena,$tofind,$replac));
 }
@@ -69,7 +69,7 @@ $params["serverid"] = $canal;
 $params["language"] = "es_ES"; /*22/12/2011 - modificado el idioma para ponerlo en español*/
 $params["theme"] = "default";
 $params["title"]  = get_lang("ChatDelCurso")." ". $canal . " ".limpiar_acentos($_SESSION["_course"]["name"]);
-$params["nick"]  =  iconv("ISO-8859-1", "UTF-8",$usuario); 
+$params["nick"]  =  $usuario; 
 $params["frozen_nick"]  = true;
 $params["refresh_delay"]  = 1000;//1 seg
 $params["timeout"]  = 120000;  //120 seg
