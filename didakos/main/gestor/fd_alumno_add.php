@@ -96,7 +96,7 @@ $form->addElement('text', 'official_code', get_lang('OfficialCode'),array('size'
 $form->applyFilter('official_code','html_filter');
 $form->applyFilter('official_code','trim');
 $form->addRule('official_code', get_lang('ThisFieldIsRequired'), 'required');
-$form->addRule('official_code', "El DNI es incorrecto", 'dni');
+// $form->addRule('official_code', "El DNI es incorrecto", 'dni');
 // Firstname
 $form->addElement('text','firstname',get_lang('FirstName'));
 $form->applyFilter('firstname','html_filter');
