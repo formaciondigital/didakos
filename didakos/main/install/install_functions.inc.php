@@ -93,6 +93,7 @@ function get_php_setting($val) {
  */
 function check_writable($folder)
 {
+    
 	if (is_writable('../'.$folder))
 	{
 		return '<strong><font color="green">'.get_lang('Writable').'</font></strong>';
@@ -100,6 +101,23 @@ function check_writable($folder)
 	else
 	{
 		return '<strong><font color="red">'.get_lang('NotWritable').'</font></strong>';
+	}
+}
+
+
+/**
+ * This function checks if the given folder is writable and executable
+ */
+function check_writable_executable($folder)
+{
+   
+	if (is_writable('../'.$folder) && @file_exists('../'.$folder.'/.') )
+	{
+		return '<strong><font color="green">'.get_lang('Executable').'</font></strong>';
+	}
+	else
+	{
+		return '<strong><font color="red">'.get_lang('NotExecutable').'</font></strong>';
 	}
 }
 
@@ -538,8 +556,18 @@ function display_requirements($installType, $badUpdatePath, $updatePath='', $upd
 				<td class="requirements-value">'.check_writable('../home/').'</td>
 			</tr>
                         <tr>
-				<td class="requirements-item">didakos/main/fchat</td>
-				<td class="requirements-value">'.check_writable('fchat/').'</td>
+				<td class="requirements-item" colspan="2"><br/>'.get_lang('exePermision').'</td>
+			</tr>
+                        <tr>
+				<td class="requirements-item" colspan="2"><br/></td>
+			</tr>
+                        <tr>
+				<td class="requirements-item">didakos/main/fchat/data/private</td>
+				<td class="requirements-value">'.check_writable_executable('fchat/data/private').'</td>
+			</tr>
+                        <tr>
+				<td class="requirements-item">didakos/main/fchat/data/public</td>
+				<td class="requirements-value">'.check_writable_executable('fchat/data/public').'</td>
 			</tr>
 			';
 	echo '</table>';
@@ -586,7 +614,7 @@ function display_requirements($installType, $badUpdatePath, $updatePath='', $upd
 		//First, attempt to set writing permissions if we don't have them yet
 		//0xxx is an octal number, this is the required format
 		$notwritable = array();
-        $curdir = getcwd();
+                $curdir = getcwd();
 		if(!is_writable('../inc/conf'))
 		{
 			$notwritable[] = realpath($curdir.'/../inc/conf');
@@ -605,11 +633,11 @@ function display_requirements($installType, $badUpdatePath, $updatePath='', $upd
 			@chmod('../upload', $perm);
 		}
 
-        if(!is_writable('../default_course_document/images/'))
-        {
-            $notwritable[] = realpath($curdir.'/../default_course_document/images/');
-            @chmod('../default_course_document/images/', $perm);
-        }
+                if(!is_writable('../default_course_document/images/'))
+                {
+                    $notwritable[] = realpath($curdir.'/../default_course_document/images/');
+                    @chmod('../default_course_document/images/', $perm);
+                }
 
 		if(!is_writable('../../archive'))
 		{
@@ -634,6 +662,29 @@ function display_requirements($installType, $badUpdatePath, $updatePath='', $upd
 			$notwritable[]= realpath($curdir.'/../inc/conf/configuration.php');
 			@chmod('../inc/conf/configuration.php',$perm_file);
 		}
+                
+                if(file_exists('../inc/conf/configuration.php') && !is_writable('../inc/conf/configuration.php'))
+		{
+			$notwritable[]= realpath($curdir.'/../inc/conf/configuration.php');
+			@chmod('../inc/conf/configuration.php',$perm_file);
+		}
+                
+                //permisos de lectura y ejecucion de las carpetas del chat
+                
+                $notexecutable = array();
+                if(!is_writable('../fchat/data/private') || !(@file_exists("../fchat/data/private/.") ))
+		{
+			$notexecutable[] = realpath($curdir.'/../fchat/data/private');
+			@chmod('../fchat/data/private',$perm);
+		}
+                
+                if(!is_writable('../fchat/data/public') || !(@file_exists("../fchat/data/public/.") ))
+		{
+			$notexecutable[] = realpath($curdir.'/../fchat/data/public');
+			@chmod('../fchat/data/public',$perm);
+		}
+                
+                //comprobacion de que los
 
 		//Second, if this fails, report an error
 		//--> the user will have to adjust the permissions manually
@@ -642,7 +693,22 @@ function display_requirements($installType, $badUpdatePath, $updatePath='', $upd
 			$error=true;
 			echo '<div style="color:red; background-color:white; font-weight:bold; text-align:center;">';
 			echo get_lang('Warning').':<br />';
-			printf(get_lang('NoWritePermissionPleaseReadInstallGuide'),'</font><a href="../../documentation/installation_guide.html" target="blank">','</a> <font color="red">');
+			printf(get_lang('NoWritePermissionPleaseReadInstallGuide'),'</font>','<font color="red">');
+			echo '<ul>';
+			foreach ($notwritable as $value)
+			{
+				echo '<li>'.$value.'</li>';
+			}
+			echo '</ul>';
+			echo '</div>';			
+		}
+                
+                if(count($notexecutable)>0)
+		{
+			$error=true;
+			echo '<div style="color:red; background-color:white; font-weight:bold; text-align:center;">';
+			echo get_lang('Warning').':<br />';
+			printf(get_lang('NoWritePermissionPleaseReadInstallGuide'),'</font>','<font color="red">');
 			echo '<ul>';
 			foreach ($notwritable as $value)
 			{
@@ -657,6 +723,21 @@ function display_requirements($installType, $badUpdatePath, $updatePath='', $upd
 				echo '<div style="color:red; background-color:white; font-weight:bold; text-align:center;">';
 				echo get_lang('WarningExistingDokeosInstallationDetected');
 				echo '</div>';
+		}
+                
+                if(count($notexecutable)>0)
+		{
+			$error=true;
+			echo '<div style="color:red; background-color:white; font-weight:bold; text-align:center;">';
+			echo get_lang('Warning').':<br />';
+			printf(get_lang('NoWritePermissionPleaseReadInstallGuide'),'</font><a href="../../documentation/installation_guide.html" target="blank">','</a> <font color="red">');
+			echo '<ul>';
+			foreach ($notwritable as $value)
+			{
+				echo '<li>'.$value.'</li>';
+			}
+			echo '</ul>';
+			echo '</div>';			
 		}
 		//and now display the choice buttons (go back or install)
 		?>

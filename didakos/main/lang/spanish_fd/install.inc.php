@@ -119,5 +119,9 @@ $langSmtpHost = "Servidor SMTP";
 $langSmtpUser = "Usuario SMTP";
 $langSmtpPass = "Clave del usuario SMTP";
 $ExisteBBDD = "Ya existe un esquema con el ese prefijo en la base de datos";
+$exePermision = "Los siguientes directorios deben tener permisos de lectura,escritura y ejecucion:";
+$NoExecutionPermission = "Los subdirectorios de fchat no tienn los permisos necesarios: ";
+$Executable = "Permisos correctos";
+$NotExecutable = "Permisos incorrectos";
 ?>
 
