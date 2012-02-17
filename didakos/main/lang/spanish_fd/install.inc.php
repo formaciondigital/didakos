@@ -123,5 +123,10 @@ $exePermision = "Los siguientes directorios deben tener permisos de lectura,escr
 $NoExecutionPermission = "Los subdirectorios de fchat no tienn los permisos necesarios: ";
 $Executable = "Permisos correctos";
 $NotExecutable = "Permisos incorrectos";
+$langbrazilian_fd = "brasileño";
+$langcatalan_fd = "catalán";
+$langenglish_fd = "inglés";
+$langfrench_fd = "francés";
+$langspanish_fd = "español";
 ?>
 

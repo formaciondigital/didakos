@@ -1112,9 +1112,10 @@ function display_configuration_settings_form(
 		sort($lang_files);
 		
 		foreach ($lang_files as $file) {
+                    $idioma = get_lang($file);
 			echo '<option value="'.$file.'"';
-				if($file == $languageForm) echo ' selected="selected"';
-				echo ">$file</option>\n";
+				if($file == $languageForm."_fd") echo ' selected="selected"';
+				echo ">$idioma</option>\n";
 		}
 
 
