@@ -40,7 +40,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_app_user` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_consumer_registry` (
   `ocr_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -60,7 +60,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_consumer_registry` (
   KEY `ocr_server_uri` (`ocr_server_uri`),
   KEY `ocr_server_uri_host` (`ocr_server_uri_host`,`ocr_server_uri_path`),
   KEY `ocr_usa_id_ref` (`ocr_usa_id_ref`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_consumer_token` (
   `oct_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -77,7 +77,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_consumer_token` (
   UNIQUE KEY `oct_usa_id_ref` (`oct_usa_id_ref`,`oct_ocr_id_ref`,`oct_token_type`,`oct_name`),
   KEY `oct_token_ttl` (`oct_token_ttl`),
   CONSTRAINT `oauth_consumer_token_ibfk_1` FOREIGN KEY (`oct_ocr_id_ref`) REFERENCES `oauth_consumer_registry` (`ocr_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=774 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_nonce` (
@@ -88,7 +88,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_nonce` (
   `osn_nonce` varchar(80) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`osn_id`),
   UNIQUE KEY `osn_consumer_key` (`osn_consumer_key`,`osn_token`,`osn_timestamp`,`osn_nonce`)
-) ENGINE=InnoDB AUTO_INCREMENT=12604 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_registry` (
@@ -112,7 +112,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_registry` (
   PRIMARY KEY (`osr_id`),
   UNIQUE KEY `osr_consumer_key` (`osr_consumer_key`),
   KEY `osr_usa_id_ref` (`osr_usa_id_ref`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_token` (
@@ -133,7 +133,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_token` (
   KEY `ost_osr_id_ref` (`ost_osr_id_ref`),
   KEY `ost_token_ttl` (`ost_token_ttl`),
   CONSTRAINT `oauth_server_token_ibfk_1` FOREIGN KEY (`ost_osr_id_ref`) REFERENCES `oauth_server_registry` (`osr_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=460 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
  CREATE TABLE `{MYSQL_PREFIX}_main`.`user_oauth` (
   `id_oauth_user` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -142,7 +142,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_token` (
   `access_token` varchar(200) DEFAULT NULL,
   `verifier` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_oauth_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=502 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
 -- insercion de registros en tabla de moviles
