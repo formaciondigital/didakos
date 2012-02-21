@@ -881,6 +881,7 @@ $design_add = "Afegir disseny";
 $design_edit = "Editar disseny";
 $design_delete = "Eliminar disseny";
 $courses = "Cursos";
+$diplomas = "Diplomes";
 $getdiploma = "Obternir diploma";
 $diplomastrack = "Seguiment de descàrregues";
 $redessociales = "Xarxes socials";

@@ -30,7 +30,7 @@
 */
 
 // name of the language file that needs to be included
-$language_file=array('exercice','tracking');
+$language_file=array('exercice','tracking','exam');
 
 // including the global dokeos file
 include('../inc/global.inc.php');
@@ -116,7 +116,7 @@ else if($origin=='tracking_course')
 {
 	$interbreadcrumb[] = array ("url" => "../mySpace/index.php", "name" => get_lang('MySpace'));
 	// Modificación FD, presentamos enlace a la página de Seguimiento general de los alumnos del informe FD, courseLog_FD.php	
-	$interbreadcrumb[] = array ("url" => "../tracking/courseLog_FD.php?cidReq=".$_GET['cidReq']."&studentlist=true", "name" => "Seguimiento de los alumnos");
+	$interbreadcrumb[] = array ("url" => "../tracking/courseLog_FD.php?cidReq=".$_GET['cidReq']."&studentlist=true", "name" => get_lang("SeguimientoAlumnos"));
 	// Modificación FD, presentamos enlace a la página de detalle del alumno del informe FD, my_progress_details_course.php	
 
 // Ejemplo de llamada a página my_progress_details_course.php	
@@ -127,7 +127,7 @@ student=5
 &origin=tracking_course
 */
 	
-	$interbreadcrumb[] = array ("url" => "../auth/my_progress_details_course.php?student=".$_GET['student']."&details=true&origin=tracking_course&course=".$_GET['cidReq'], "name" => "Detalle del alumno");
+	$interbreadcrumb[] = array ("url" => "../auth/my_progress_details_course.php?student=".$_GET['student']."&details=true&origin=tracking_course&course=".$_GET['cidReq'], "name" => get_lang("DetalleAlumno"));
 	
 	/*
  	$interbreadcrumb[] = array ("url" => "../mySpace/myStudents.php?student=".$_GET['student'].'&details=true&origin='.$origin.'&course='.$_GET['cidReq'], "name" => get_lang("DetailsStudentInCourse"));

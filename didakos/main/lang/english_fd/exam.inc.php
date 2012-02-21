@@ -48,7 +48,9 @@ $ResultsDisabled = "Exam mode activated. Now, at the end of the exam lthe studen
 $ExamCompleted = "You cannot complete the exam because you have already reached the maximum nimber of possible attempts.";
 $ExamMin = "The number of questions is less than the minimum number of questions established in the exam.";
 $ExamRandomMin = "The number of questions randomly established is greater than the minimum number of questions indicated in the exam.";
-$toolExams = "Exams without images";
+$toolExams = "Exams";
 $ExerciseIntentos = "Attempts permitted";
 $ExerciseMinimo = "Minimum number of questions";
+$SeguimientoAlumnos = "Student monitoring";
+$DetalleAlumno = "Student's detail";
 ?>

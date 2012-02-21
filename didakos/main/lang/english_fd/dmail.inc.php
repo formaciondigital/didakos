@@ -28,9 +28,9 @@ $Crearcarpeta= "Create a folder";
 $Volverlistado= "Return to the list";
 $Nombrecarpeta= "Name of folder";
 $Nombrecarpetanulo= "The name of the folder cannot be left blank";
-$Lacarpeta= "The folder";
+$La_carpeta= "The folder";
 $Carpetacreadaok=" It has been created correctly";
-$Yaexistecarpeta= "There is already a folder with this name";
+$Ya_existe_carpeta= "There is already a folder with this name";
 $Nombreactualcarpeta= "Current name";
 $Nombrenuevocarpeta= "New name";
 $Contenidomovido=" It has been correctly modified. The messages that were here have been moved to Received";
@@ -47,4 +47,17 @@ $Dmailenviado="The Dmail has been sent correctly";
 $Pagina="Page";
 $Paginas="Pages";
 $De="of";
+
+$Enviar="Send";
+$GuardarBorrador="Save draft";
+$Adjuntar="Attach";
+$Recuperar="Recover";
+$Nombre_carpeta="Folder name";
+$Guardar="Save";
+$Nombre_actual="Current name";
+$Nombre_nuevo="New name";
+$CreadaCorrecta="It has been created correctly";
+
+$CarpetaModificadaCorrecta="It has been modified correctly";
+$CarpetaEliminadaCorrecta="The folder has been deleted correctly";
 ?>
