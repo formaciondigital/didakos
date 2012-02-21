@@ -426,69 +426,69 @@ elseif (!empty($_POST['step5']))
 <table cellpadding="6" cellspacing="0" border="0" width="75%" align="center">
 <tr>
   <td>
-	<input type="hidden" name="updatePath"           value="<?php if(!$badUpdatePath) echo htmlentities($proposedUpdatePath); ?>" />
-	<input type="hidden" name="urlAppendPath"        value="<?php echo htmlentities($urlAppendPath); ?>" />
-	<input type="hidden" name="pathForm"             value="<?php echo htmlentities($pathForm); ?>" />
-	<input type="hidden" name="urlForm"              value="<?php echo htmlentities($urlForm); ?>" />
-	<input type="hidden" name="dbHostForm"           value="<?php echo htmlentities($dbHostForm); ?>" />
-	<input type="hidden" name="dbUsernameForm"       value="<?php echo htmlentities($dbUsernameForm); ?>" />
-	<input type="hidden" name="dbPassForm"           value="<?php echo htmlentities($dbPassForm); ?>" />
-	<input type="hidden" name="singleDbForm"         value="<?php echo htmlentities($singleDbForm); ?>" />
-	<input type="hidden" name="dbPrefixForm"         value="<?php echo htmlentities($dbPrefixForm); ?>" />
-	<input type="hidden" name="dbNameForm"           value="<?php echo htmlentities($dbNameForm); ?>" />
+	<input type="hidden" name="updatePath"           value="<?php if(!$badUpdatePath) echo   ($proposedUpdatePath); ?>" />
+	<input type="hidden" name="urlAppendPath"        value="<?php echo   ($urlAppendPath); ?>" />
+	<input type="hidden" name="pathForm"             value="<?php echo   ($pathForm); ?>" />
+	<input type="hidden" name="urlForm"              value="<?php echo   ($urlForm); ?>" />
+	<input type="hidden" name="dbHostForm"           value="<?php echo   ($dbHostForm); ?>" />
+	<input type="hidden" name="dbUsernameForm"       value="<?php echo   ($dbUsernameForm); ?>" />
+	<input type="hidden" name="dbPassForm"           value="<?php echo   ($dbPassForm); ?>" />
+	<input type="hidden" name="singleDbForm"         value="<?php echo   ($singleDbForm); ?>" />
+	<input type="hidden" name="dbPrefixForm"         value="<?php echo   ($dbPrefixForm); ?>" />
+	<input type="hidden" name="dbNameForm"           value="<?php echo   ($dbNameForm); ?>" />
 <?php
 	if($installType == 'update' OR $singleDbForm == 0)
 	{
 ?>
-	<input type="hidden" name="dbStatsForm"          value="<?php echo htmlentities($dbStatsForm); ?>" />
-	<input type="hidden" name="dbScormForm"          value="<?php echo htmlentities($dbScormForm); ?>" />
-	<input type="hidden" name="dbUserForm"           value="<?php echo htmlentities($dbUserForm); ?>" />
+	<input type="hidden" name="dbStatsForm"          value="<?php echo   ($dbStatsForm); ?>" />
+	<input type="hidden" name="dbScormForm"          value="<?php echo   ($dbScormForm); ?>" />
+	<input type="hidden" name="dbUserForm"           value="<?php echo   ($dbUserForm); ?>" />
 <?php
 	}
 	else
 	{
 ?>
-	<input type="hidden" name="dbStatsForm"          value="<?php echo htmlentities($dbNameForm); ?>" />
-	<input type="hidden" name="dbUserForm"           value="<?php echo htmlentities($dbNameForm); ?>" />
+	<input type="hidden" name="dbStatsForm"          value="<?php echo   ($dbNameForm); ?>" />
+	<input type="hidden" name="dbUserForm"           value="<?php echo   ($dbNameForm); ?>" />
 <?php
 	}
 ?>
-	<input type="hidden" name="enableTrackingForm"   value="<?php echo htmlentities($enableTrackingForm); ?>" />
-	<input type="hidden" name="allowSelfReg"         value="<?php echo htmlentities($allowSelfReg); ?>" />
-	<input type="hidden" name="allowSelfRegProf"     value="<?php echo htmlentities($allowSelfRegProf); ?>" />
-	<input type="hidden" name="emailForm"            value="<?php echo htmlentities($emailForm); ?>" />
-	<input type="hidden" name="adminLastName"        value="<?php echo htmlentities($adminLastName); ?>" />
-	<input type="hidden" name="adminFirstName"       value="<?php echo htmlentities($adminFirstName); ?>" />
-	<input type="hidden" name="adminPhoneForm"       value="<?php echo htmlentities($adminPhoneForm); ?>" />
-	<input type="hidden" name="loginForm"            value="<?php echo htmlentities($loginForm); ?>" />
-	<input type="hidden" name="passForm"             value="<?php echo htmlentities($passForm); ?>" />
+	<input type="hidden" name="enableTrackingForm"   value="<?php echo   ($enableTrackingForm); ?>" />
+	<input type="hidden" name="allowSelfReg"         value="<?php echo   ($allowSelfReg); ?>" />
+	<input type="hidden" name="allowSelfRegProf"     value="<?php echo   ($allowSelfRegProf); ?>" />
+	<input type="hidden" name="emailForm"            value="<?php echo   ($emailForm); ?>" />
+	<input type="hidden" name="adminLastName"        value="<?php echo   ($adminLastName); ?>" />
+	<input type="hidden" name="adminFirstName"       value="<?php echo   ($adminFirstName); ?>" />
+	<input type="hidden" name="adminPhoneForm"       value="<?php echo   ($adminPhoneForm); ?>" />
+	<input type="hidden" name="loginForm"            value="<?php echo   ($loginForm); ?>" />
+	<input type="hidden" name="passForm"             value="<?php echo   ($passForm); ?>" />
         
-        <input type="hidden" name="gestoremailForm"       value="<?php echo htmlentities($gestoremailForm); ?>" />
-	<input type="hidden" name="gestorLastName"        value="<?php echo htmlentities($gestorLastName); ?>" />
-	<input type="hidden" name="gestorFirstName"       value="<?php echo htmlentities($gestorFirstName); ?>" />
-	<input type="hidden" name="gestorloginForm"       value="<?php echo htmlentities($gestorloginForm); ?>" />
-	<input type="hidden" name="gestorpassForm"        value="<?php echo htmlentities($gestorpassForm); ?>" />
+        <input type="hidden" name="gestoremailForm"       value="<?php echo   ($gestoremailForm); ?>" />
+	<input type="hidden" name="gestorLastName"        value="<?php echo   ($gestorLastName); ?>" />
+	<input type="hidden" name="gestorFirstName"       value="<?php echo   ($gestorFirstName); ?>" />
+	<input type="hidden" name="gestorloginForm"       value="<?php echo   ($gestorloginForm); ?>" />
+	<input type="hidden" name="gestorpassForm"        value="<?php echo   ($gestorpassForm); ?>" />
 
-        <input type="hidden" name="SmtpFromEmail"       value="<?php echo htmlentities($SmtpFromEmail); ?>" />
-	<input type="hidden" name="SmtpFromName"        value="<?php echo htmlentities($SmtpFromName); ?>" />
-	<input type="hidden" name="SmtpHost"            value="<?php echo htmlentities($SmtpHost); ?>" />
-	<input type="hidden" name="SmtpUser"            value="<?php echo htmlentities($SmtpUser); ?>" />
-	<input type="hidden" name="SmtpPass"            value="<?php echo htmlentities($SmtpPass); ?>" />
+        <input type="hidden" name="SmtpFromEmail"       value="<?php echo   ($SmtpFromEmail); ?>" />
+	<input type="hidden" name="SmtpFromName"        value="<?php echo   ($SmtpFromName); ?>" />
+	<input type="hidden" name="SmtpHost"            value="<?php echo   ($SmtpHost); ?>" />
+	<input type="hidden" name="SmtpUser"            value="<?php echo   ($SmtpUser); ?>" />
+	<input type="hidden" name="SmtpPass"            value="<?php echo   ($SmtpPass); ?>" />
         
-        <input type="hidden" name="ServicioTecnico"            value="<?php echo htmlentities($ServicioTecnico); ?>" />
+        <input type="hidden" name="ServicioTecnico"            value="<?php echo   ($ServicioTecnico); ?>" />
 
-	<input type="hidden" name="languageForm"         value="<?php echo htmlentities($languageForm); ?>" />
-	<input type="hidden" name="campusForm"           value="<?php echo htmlentities($campusForm); ?>" />
-	<input type="hidden" name="educationForm"        value="<?php echo htmlentities($educationForm); ?>" />
-	<input type="hidden" name="institutionForm"      value="<?php echo htmlentities($institutionForm); ?>" />
-	<input type="hidden" name="institutionUrlForm"   value="<?php echo stristr($institutionUrlForm,'http://')?htmlentities($institutionUrlForm):'http://'.htmlentities($institutionUrlForm); ?>" />
-	<input type="hidden" name="checkEmailByHashSent" value="<?php echo htmlentities($checkEmailByHashSent); ?>" />
-	<input type="hidden" name="ShowEmailnotcheckedToStudent" value="<?php echo htmlentities($ShowEmailnotcheckedToStudent); ?>" />
-	<input type="hidden" name="userMailCanBeEmpty"   value="<?php echo htmlentities($userMailCanBeEmpty); ?>" />
-	<input type="hidden" name="encryptPassForm"      value="<?php echo htmlentities($encryptPassForm); ?>" />
-	<input type="hidden" name="session_lifetime"  value="<?php echo htmlentities($session_lifetime); ?>" />
-	<input type="hidden" name="old_version"  value="<?php echo htmlentities($my_old_version); ?>" />
-	<input type="hidden" name="new_version"  value="<?php echo htmlentities($new_version); ?>" />
+	<input type="hidden" name="languageForm"         value="<?php echo   ($languageForm); ?>" />
+	<input type="hidden" name="campusForm"           value="<?php echo   ($campusForm); ?>" />
+	<input type="hidden" name="educationForm"        value="<?php echo   ($educationForm); ?>" />
+	<input type="hidden" name="institutionForm"      value="<?php echo   ($institutionForm); ?>" />
+	<input type="hidden" name="institutionUrlForm"   value="<?php echo stristr($institutionUrlForm,'http://')?  ($institutionUrlForm):'http://'.  ($institutionUrlForm); ?>" />
+	<input type="hidden" name="checkEmailByHashSent" value="<?php echo   ($checkEmailByHashSent); ?>" />
+	<input type="hidden" name="ShowEmailnotcheckedToStudent" value="<?php echo   ($ShowEmailnotcheckedToStudent); ?>" />
+	<input type="hidden" name="userMailCanBeEmpty"   value="<?php echo   ($userMailCanBeEmpty); ?>" />
+	<input type="hidden" name="encryptPassForm"      value="<?php echo   ($encryptPassForm); ?>" />
+	<input type="hidden" name="session_lifetime"  value="<?php echo   ($session_lifetime); ?>" />
+	<input type="hidden" name="old_version"  value="<?php echo   ($my_old_version); ?>" />
+	<input type="hidden" name="new_version"  value="<?php echo   ($new_version); ?>" />
 
 
 

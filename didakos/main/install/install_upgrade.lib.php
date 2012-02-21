@@ -340,12 +340,13 @@ function load_main_database($installation_settings)
 {
 	$dokeos_main_sql_file_string = file_get_contents(DOKEOS_MAIN_DATABASE_FILE);
          
-	
 	//replace symbolic parameters with user-specified values
 	foreach ($installation_settings as $key => $value)
 	{
 		$dokeos_main_sql_file_string = str_replace($key, mysql_real_escape_string($value), $dokeos_main_sql_file_string);
 	}
+        
+
 	
         //return $dokeos_main_sql_file_string;
         //return $dokeos_main_sql_file_string;
@@ -361,7 +362,7 @@ function load_main_database($installation_settings)
 		$this_sql_query = $sql_instructions[$i]['query'];
 		$res = mysql_query($this_sql_query);
                 if(!$res && $this_sql_query != ''){
-                   $errores = $errores ."<br>". mysql_error()."<br>".$this_sql_query;
+                   $errores = $errores ."<br>". mysql_error();
                 }
 	}
         

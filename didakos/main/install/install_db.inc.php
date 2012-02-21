@@ -32,7 +32,7 @@
 */
 
 require_once("install_upgrade.lib.php");
-
+header("en");
 /*
 ==============================================================================
 		MAIN CODE
@@ -227,7 +227,7 @@ $installation_settings['{GESTOREMAIL}'] = $gestoremailForm;
 $resutado = load_main_database($installation_settings);
 
 if($resutado != ""){
-    echo "<b>errores encontrado:<b>".$resutado."<br><br><br>";
+    echo "<b>errores encontrado:</b>".$resutado."<br><br><br>";
 }
 
 /**
