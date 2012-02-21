@@ -168,7 +168,20 @@ class CourseArchiver
 
 		// Zip the course-contents
 		$zip = new PclZip($zip_dir.$zip_file);
-		$zip->create($zip_dir.$tmp_dir_name, PCLZIP_OPT_REMOVE_PATH, $zip_dir.$tmp_dir_name.'/');
+                
+                
+                                
+                                //21-02-12 - fixed path problem in windows
+                                $v_dir = $zip_dir.$tmp_dir_name;
+
+                                if (substr($v_dir, 1,1) == ':') {
+                                $v_origin = substr($v_dir, 2);
+
+                                }else{
+                                $v_origin = $v_dir;
+                                }  
+                                
+		$zip->create($v_origin, PCLZIP_OPT_REMOVE_PATH, $v_origin.'/');
 		//$zip->deleteByIndex(0);
 		// Remove the temp-dir.
 		rmdirr($backup_dir);
