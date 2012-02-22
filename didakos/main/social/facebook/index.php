@@ -7,26 +7,7 @@
  	PÁGINA QUE PRESENTA LOS LOGOS DE LAS DISTINTAS REDES SOCIALES EN INVESTIGACIÓN		
 ==============================================================================
 */
-/*
 
-CREATE TABLE `fd_xxxxxxxxxxxx_main`.`parametros_facebook` (
-  `id` NUMERIC UNSIGNED NOT NULL,
-  `user_id` NUMERIC  NOT NULL,
-  `facebook_id` NUMERIC  NOT NULL,
-  `acess_token` VARCHAR(255)  NOT NULL,
-  `fecha_operacion` TIMESTAMP  NOT NULL,
-  PRIMARY KEY (`id`)
-)
-ENGINE = MyISAM;
-
-// Datos de la cuenta de facebook
-// correo: version08.formaciondigital@gmail.com
-// clave del correo: version08facebook
-Aun no esta creada la aplicacion
-y hay que modificar abajo el client_id y el secret... lo ideal es un archivo de config como el twitter.
-
-
-*/
 $language_file[] = 'redes_sociales';
 //funciones necesarias
 require ('funciones_facebook.php');
@@ -54,39 +35,35 @@ if(!api_get_facebook_tokens($user_id))
 		$url = "https://graph.facebook.com/oauth/access_token?client_id=".CONSUMER_KEY."&redirect_uri=".$_configuration['root_web']."main/social/facebook/index.php&scope=offline_access,publish_stream,read_stream&client_secret=".CONSUMER_SECRET."&code=$code";
 		$ch = curl_init();
 		$opts[CURLOPT_URL] = $url;
-		if ($proxy!='') 
-                {
-		$opts[CURLOPT_PROXY] = $proxy;
-		$opts[CURLOPT_PROXYUSERPWD] = $proxyuserpwd;
-		}
-		$opts[CURLOPT_RETURNTRANSFER] = true;
+		$opts[CURLOPT_RETURNTRANSFER]= true;
+		/* $opts[CURLOPT_SSL_VERIFYPEER]= false;
+		$opts[CURLOPT_CONNECTTIMEOUT]= 30;
+		$opts[CURLOPT_TIMEOUT]= 30; */
+
+		if (isset($_SESSION['proxy']))
+		  {
+		    $opts[CURLOPT_PROXY] = $_SESSION['proxy'];
+		    $opts[CURLOPT_PROXYUSERPWD] = $_SESSION['proxyuserpwd'];
+		    $opts[CURLOPT_PROXYAUTH] = $_SESSION['proxyauth'];
+		  }
+
+		//$opts[CURLOPT_RETURNTRANSFER] = true;
 		curl_setopt_array($ch, $opts);
 		$result = curl_exec($ch);
+
 		curl_close($ch);
-		//Obtenemos el access token y lo guardamos en BBDD
-		$parametros_facebook= Database::get_main_table(TABLE_PARAMETROS_FACEBOOK); 
+
 		$data1 = explode("=",$result);
 		$data2 = explode("&",$data1[1]);
+
+		//Obtenemos el access token y lo guardamos en BBDD
+		$parametros_facebook= Database::get_main_table(TABLE_PARAMETROS_FACEBOOK);
 		$sql ="insert into ".$parametros_facebook." (user_id,access_token) values (".$user_id.",'". $data2[0] ."')";
 		$res = api_sql_query($sql,__FILE__,__LINE__);		
 	}
 }
 else
 {
-	/*
-	$ch = curl_init();
-	$opts[CURLOPT_URL] = "https://graph.facebook.com/home?access_token=". $_SESSION['foauth_at'];
-	$opts[CURLOPT_PROXY] = '10.2.11.1:3128';
-	$opts[CURLOPT_RETURNTRANSFER] = true;
-	curl_setopt_array($ch, $opts);
-	$result = curl_exec($ch);
-	curl_close($ch);
-
-	$user_info=@json_decode($result);
-	$fb_id=$user_info->id; // returns user's facebook id
-	$fb_name=$user_info->name; // returns user's facebook full name
-	*/
-
 	if ( isset($_GET['opcion'] ))
 	{
 		$opcion=$_GET['opcion'];

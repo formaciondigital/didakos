@@ -3,9 +3,8 @@
 		FUNCIONES PARA INTERACTUAR CON RED SOCIAL TWITTER MEDIANTE OAUTH
 
 ***********************************************************************************************************************************/
-include("../../inc/global.inc.php");
-require('tOAuth/tOAuth.class.php');
 
+include("../../inc/global.inc.php");
 
 $t_keys = Database::get_main_table(TABLE_REDES_SOCIALES);   
 $sql = "select * from $t_keys where name='twitter'";
@@ -14,6 +13,9 @@ $temp_row = Database::fetch_array($result);
 define('CONSUMER_KEY', $temp_row['consumer_key']);
 define('CONSUMER_SECRET', $temp_row['consumer_secret']);
 
+
+
+require('tOAuth/tOAuth.class.php');
 
 /*
 Consulta si tenemos los tokens de Twitter del usuario indicado y si los tenemos, los guarda en la sesión
