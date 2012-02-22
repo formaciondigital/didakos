@@ -1,7 +1,9 @@
 <?php
 ob_start();
 //session_start();
-require_once('tOAuth/tOAuth.class.php');
+//echo $_SESSION['proxy'];
+
+// require_once('tOAuth/tOAuth.class.php');
 $language_file[] = 'redes_sociales';
 require ('../../inc/global.inc.php');
 require ('funciones_twitter.php');
@@ -10,8 +12,6 @@ Display :: display_header($tool_name);
 
 //ruta del callback
 $args = array ('oauth_callback'=> $_configuration['root_web'] . 'main/social/twitter/permisos_twitter.php');
-print_r ($args);
-die();
 // Tomamos el user_id del alumno de la sesión
 $user_id= $_SESSION["_user"]["user_id"];
 $parametros_twitter= Database::get_main_table(TABLE_PARAMETROS_TWITTER); 
@@ -24,8 +24,7 @@ if(empty($_SESSION['toauth_at']) || empty($_SESSION['toauth_ats']))
 		$connection = new tOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['toauth_rt'], $_SESSION['toauth_rts']);
 		$a = $connection->authenticate(false,null,null,$args);
 		print_r ($a);
-		
-		
+		    		
 		$_SESSION['toauth_at'] = $a['oauth_token'];
 		$_SESSION['toauth_ats'] = $a['oauth_token_secret'];
 		$_SESSION['toauth_state'] = 'returned';
@@ -40,6 +39,7 @@ if(empty($_SESSION['toauth_at']) || empty($_SESSION['toauth_ats']))
 				$res = api_sql_query($sql,__FILE__,__LINE__);
 			}
 	}else {
+
 		$connection = new tOAuth(CONSUMER_KEY, CONSUMER_SECRET);
 		$a = $connection->authenticate(true,null,null,$args);
 		$_SESSION['toauth_rt'] = $a['oauth_token'];

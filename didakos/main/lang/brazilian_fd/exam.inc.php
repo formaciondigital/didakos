@@ -51,4 +51,6 @@ $ExamRandomMin = "O número de perguntas aleatórias estabelecido é maior que o
 $toolExams = "Provas";
 $ExerciseIntentos = "Tentativas permitidas";
 $ExerciseMinimo = "Número mínimo de perguntas";
+$SeguimientoAlumnos = "A perseguição dos estudantes";
+$DetalleAlumno = "Detalhe do estudante";
 ?>

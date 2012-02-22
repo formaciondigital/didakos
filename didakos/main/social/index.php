@@ -16,6 +16,33 @@ $tool_name = get_lang("Redessociales");
 Display :: display_header($tool_name);  	
 api_protect_course_script();
 api_display_tool_title(get_lang("Redessociales"));
+
+// Get proxy configuration
+
+$settings = Database::get_main_table (TABLE_MAIN_SETTINGS_CURRENT);
+$sql = "Select selected_value from". $settings. "where variable='proxy'";
+$res = 	api_sql_query($sql,__FILE__,__LINE__);
+$temp_row = Database::fetch_array($res);   
+
+if ($temp_row['selected_value'] != '');
+{
+     $_SESSION['proxy'] = $temp_row['selected_value'];
+}
+$sql = "Select selected_value from". $settings. "where variable='proxyuserpwd'";
+$res = 	api_sql_query($sql,__FILE__,__LINE__);
+$temp_row = Database::fetch_array($res);   
+if ($temp_row['selected_value'] != '');
+{
+    $_SESSION['proxyuserpwd'] = $temp_row['selected_value'];
+}
+$sql = "Select selected_value from". $settings. "where variable='proxyauth'";
+$res = 	api_sql_query($sql,__FILE__,__LINE__);
+$temp_row = Database::fetch_array($res);   
+if ($temp_row['selected_value'] != '');
+{
+    $_SESSION['proxyauth'] = $temp_row['selected_value'];
+}
+
 ?>	
 	<p><?php echo get_lang ("LasRedesSocialesSon"); ?></p>
 	<p align="center">

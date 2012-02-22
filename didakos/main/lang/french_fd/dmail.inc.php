@@ -84,4 +84,5 @@ $Apellidos="Nom";
 $Aceptar="Accepter";
 $Cancelar="Annuler";
 $Fecha_envio="Date d'envoi";
+$Adjuntar="Joindre";
 ?>

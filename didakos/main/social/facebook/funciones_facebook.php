@@ -1,27 +1,4 @@
 <?php
-/*
-Añadida a main_api.lib.php
-function obtener_tokens_facebook($user_id)
-{	
-	$parametros_facebook= Database::get_main_table(TABLE_PARAMETROS_FACEBOOK); 
-	$sql="SELECT * FROM ". $parametros_facebook ." where user_id=".$user_id;
-	$res = api_sql_query($sql,__FILE__,__LINE__);
-	$row = Database::fetch_array($res);
-
-	if (!isset($row['user_id'])) 
-	{  
-		// No Existe el alumno en la tabla
-		// No tenemos los tokens del alumno
-		return "false";
-	}
-	else  
-	{ 
-		// Sí tenemos los tokens del alumno, los guardamos en la sesión
-		$_SESSION['foauth_at']=$row['access_token'];
-		return "true";		
-	}
-}	
-*/
 
 function borrar_tokens_facebook ($user_id)
 {	
@@ -36,12 +13,14 @@ function borrar_tokens_facebook ($user_id)
 	//Borramos de facebook
 	$ch = curl_init();
 	$opts[CURLOPT_URL] = "https://api.facebook.com/method/auth.revokeAuthorization?access_token=". $_SESSION['foauth_at'] . "&format=json";
-	if ($proxy!='') 
-	{
-	    $opts[CURLOPT_PROXY] = $proxy;
-	    $opts[CURLOPT_PROXYUSERPWD] = $proxyuserpwd;	
-	    $opts[CURLOPT_PROXYAUTH] =$proxyauth;
-	}
+
+	if (isset($_SESSION['proxy']))
+	  {
+	    $opts[CURLOPT_PROXY] = $_SESSION['proxy'];
+	    $opts[CURLOPT_PROXYUSERPWD] = $_SESSION['proxyuserpwd'];
+	    $opts[CURLOPT_PROXYAUTH] =$_SESSION['proxyauth'];
+	  }
+	
 	$opts[CURLOPT_RETURNTRANSFER] = true;
 	curl_setopt_array($ch, $opts);
 	$result = curl_exec($ch);
@@ -74,12 +53,12 @@ function publica_link_facebook ($titulo,$mensaje,$link,$imagen,$texto)
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	if ($proxy!='') 
-        {
-	curl_setopt($ch, CURLOPT_PROXY, $proxy); 
-	curl_setopt($ch, CURLOPT_PROXYUSERPWD,$proxyuserpwd);
-	curl_setopt($ch, CURLOPT_PROXYAUTH,$proxyauth);
-        }
+	if (isset($_SESSION['proxy']))
+	  {
+	      curl_setopt($ch,CURLOPT_PROXY,$_SESSION['proxy']);
+	      curl_setopt($ch,CURLOPT_PROXYUSERPWD,$_SESSION['proxyuserpwd']);	
+	      curl_setopt($ch,CURLOPT_PROXYAUTH,$_SESSION['proxyauth']);
+	  }                       
 	curl_exec($ch);
 	curl_close($ch);
 }
@@ -103,12 +82,12 @@ function publica_mensaje_facebook ($mensaje)
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	if ($proxy!='') 
-        {
-	curl_setopt($ch, CURLOPT_PROXY, $proxy); 
-	curl_setopt($ch, CURLOPT_PROXYUSERPWD,$proxyuserpwd);
-	curl_setopt($ch, CURLOPT_PROXYAUTH,$proxyauth);
-        }
+	if (isset($_SESSION['proxy']))
+	  {
+	      curl_setopt($ch,CURLOPT_PROXY,$_SESSION['proxy']);
+	      curl_setopt($ch,CURLOPT_PROXYUSERPWD,$_SESSION['proxyuserpwd']);	
+	      curl_setopt($ch,CURLOPT_PROXYAUTH,$_SESSION['proxyauth']);
+	  }
 	curl_exec($ch);
 	curl_close($ch);
 }
@@ -126,12 +105,12 @@ function lee_ultimos_post($numero)
 
 		$ch = curl_init();
 		$opts[CURLOPT_URL] = "https://graph.facebook.com/me/home?access_token=". $_SESSION['foauth_at'];
-		if ($proxy!='') 
-		{
-		    $opts[CURLOPT_PROXY] = $proxy;
-		    $opts[CURLOPT_PROXYUSERPWD] = $proxyuserpwd;	
-		    $opts[CURLOPT_PROXYAUTH] =$proxyauth;
-		}
+		if (isset($_SESSION['proxy']))
+		  {
+		    $opts[CURLOPT_PROXY] = $_SESSION['proxy'];
+		    $opts[CURLOPT_PROXYUSERPWD] = $_SESSION['proxyuserpwd'];
+		    $opts[CURLOPT_PROXYAUTH] =$_SESSION['proxyauth'];
+		  }
 		$opts[CURLOPT_RETURNTRANSFER] = true;
 		curl_setopt_array($ch, $opts);
 		$result = curl_exec($ch);

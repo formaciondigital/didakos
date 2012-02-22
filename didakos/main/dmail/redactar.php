@@ -246,7 +246,7 @@ api_display_tool_title($tool_name);
 	<div name="lateral" class="lateral">
 		<table name="carpetas" class="carpetas">
 			<tr>
-				<td class="titulo">Carpetas Locales</td>
+				<td class="titulo"><?php echo get_lang('Carpetas_loc');?></td>
 			</tr>
 			<tr>
 			<?php 
@@ -271,6 +271,7 @@ api_display_tool_title($tool_name);
 				else
 				{
 				  echo '<td class=""><img src="img/folder.gif"> <a class="tool-icon" href="index.php?dir=destacados" target="_self">'.get_lang('Destacados').'</a> (' . $total . ')</td>';
+
 				}
 			?>
 			</tr>
@@ -453,7 +454,7 @@ api_display_tool_title($tool_name);
 							  <b><?php echo get_lang('Adjunto')?>: </b>
 							</td>
 							<td class="filacorreonoleida" width="90%">
-								<input name="adjunto" type="file" value="Adjuntar">
+								<input name="adjunto" type="file" value="<?php echo get_lang('Adjuntar');?>">
 							</td>
 						</tr>
 						<tr>
@@ -473,7 +474,7 @@ api_display_tool_title($tool_name);
 						<tr>
 							<td width="100%" colspan="2" class="filacorreonoleida">		
 								<input type="submit" name="enviar" value="<?php echo get_lang('Enviar')?>" >
-								<input type="submit" name="guardar" value="<?php echo get_lang('Borrador')?>">
+								<input type="submit" name="guardar" value="<?php echo get_lang('GuardarBorrador')?>">
 							</td>
 						</form>
 						<?php
@@ -519,7 +520,7 @@ api_display_tool_title($tool_name);
 									}
 									else
 									{ ?>
-									  <input name="adjunto" type="file" value="Adjuntar">
+									  <input name="adjunto" type="file" value="<?php echo get_lang('Adjuntar');?>">
 									  <?
 									}
 								?>
@@ -603,7 +604,7 @@ api_display_tool_title($tool_name);
 									}
 									else
 									{ ?>
-									  <input name="adjunto" type="file" value="Adjuntar">
+									  <input name="adjunto" type="file" value="<?php echo get_lang('Adjuntar');?>">
 									  <?
 									}
 								?>

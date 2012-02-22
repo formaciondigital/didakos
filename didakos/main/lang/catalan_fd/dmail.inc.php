@@ -40,5 +40,6 @@ $Pagina = "Página";
 $Paginas = "Pagines";
 $Dmailenviado = "Dmail enviat";
 $Dmailborrador = "Dmail ha estat guardat en la carpeta d'Esborranys correctament."
+$Recuperar="Recuperar";
 
 ?>

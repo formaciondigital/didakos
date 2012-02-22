@@ -884,10 +884,11 @@ $design_add = "Add design";
 $design_edit = "Edit design";
 $design_delete = "Delete design";
 $courses = "Courses";
+$diplomas = "Diplomas";
 $getdiploma = "Obtain diploma";
 $diplomastrack = "Progress reports of downloads";
-$redessociales = "Redes sociales";
-$redessocialesconfig = "Configurar redes sociales";
+$redessociales = "Social Networks";
+$redessocialesconfig = "Config Social Networks";
 // Nuevos !!!				
 $proxy = "Proxy";
 $proxyuserpwd = "Proxy username and key";

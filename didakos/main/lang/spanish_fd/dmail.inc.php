@@ -82,4 +82,6 @@ $Markasunreaded="Marcar como no leído";
 $Selmensaje_leido ="Debe seleccionar al menos un Dmail";
 $SeguroLeido="¿Esta seguro de cambiar el estado leído/no leído?";
 $DmailLeidos="Los cambios de estado Leído/No leído se han realizado correctamente";
+
+$Adjuntar="Adjuntar";
 ?>

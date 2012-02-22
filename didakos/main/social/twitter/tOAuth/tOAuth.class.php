@@ -17,7 +17,7 @@ require_once('OAuth.php');
 class tOAuth {
 	private static $sha1_method, $consumer, $token;
 	public static $http_code;
-
+	
         
 	function __construct($consumer_key, $consumer_secret, $oauth_token = NULL, $oauth_token_secret=NULL) {
 		self::$sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
@@ -29,6 +29,7 @@ class tOAuth {
 	}
 
 	function curl($url, $post = NULL) {
+
 		$ch = curl_init();
 		//print_r("curl_init:".$ch);
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -36,20 +37,14 @@ class tOAuth {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        /*
-                if (iiset($proxy))
+
+                if (isset($_SESSION['proxy']))
                 {
-                    $opts[CURLOPT_PROXY] = $proxy;
-                    $opts[CURLOPT_PROXYUSERPWD] = $proxyuserpwd;	
-                    $opts[CURLOPT_PROXYAUTH] =$proxyauth;
+                    curl_setopt($ch,CURLOPT_PROXY,$_SESSION['proxy']);
+                    curl_setopt($ch,CURLOPT_PROXYUSERPWD,$_SESSION['proxyuserpwd']);	
+                    curl_setopt($ch,CURLOPT_PROXYAUTH,$_SESSION['proxyauth']);
                 }
-	*/
-          
-                curl_setopt($ch, CURLOPT_PROXY, '10.2.11.1:3128');
-        curl_setopt($ch, CURLOPT_PROXYUSERPWD,'nntt:n9n8t7t6');
-        curl_setopt($ch, CURLOPT_PROXYAUTH,CURLAUTH_BASIC);
-          
-                 
+                          
                 if(isset($post)) curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
 		$result = curl_exec($ch);
