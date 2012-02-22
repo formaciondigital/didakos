@@ -118,5 +118,15 @@ $langSmtpFromName = "Nom del remitent";
 $langSmtpHost = "Servidor SMTP";
 $langSmtpUser = "Usuari SMTP";
 $langSmtpPass = "Clau de l'usuari SMTP";
+$ExisteBBDD = "Ja existeix un esquema amb aquest prefix en la base de dades";
+$exePermision = "Els següents directoris han de tenir permisos de lectura,escritura i execució:";
+$NoExecutionPermission = "Els subdirectoris de fxat no tenen els permisos necessaris: ";
+$Executable = "Permisos correctes";
+$NotExecutable = "Permisos incorrectes";
+$langbrazilian_fd = "brasiler";
+$langcatalan_fd = "català";
+$langenglish_fd = "anglès";
+$langfrench_fd = "francès";
+$langspanish_fd = "espanyol";
 
 ?>
