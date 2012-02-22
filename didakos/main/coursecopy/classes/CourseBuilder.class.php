@@ -300,6 +300,8 @@ class CourseBuilder
 		$table_qui = Database :: get_course_table(TABLE_QUIZ_TEST);
 		$table_rel = Database :: get_course_table(TABLE_QUIZ_TEST_QUESTION);
 		$table_doc = Database :: get_course_table(TABLE_DOCUMENT);
+		$table_exam = Database :: get_course_table(TABLE_QUIZ_TEST_EXAM);
+
 		$sql = 'SELECT * FROM '.$table_qui.' WHERE active >=0'; //select only quizzes with active = 0 or 1 (not -1 which is for deleted quizzes)
 		$db_result = api_sql_query($sql, __FILE__, __LINE__);
 		while ($obj = Database::fetch_object($db_result))
@@ -309,7 +311,22 @@ class CourseBuilder
 				$doc = Database::fetch_object(api_sql_query("SELECT id FROM ".$table_doc." WHERE path = '/audio/".$obj->sound."'"));
 				$obj->sound = $doc->id;
 			}
-			$quiz = new Quiz($obj->id, $obj->title, $obj->description, $obj->random, $obj->type, $obj->active, $obj->sound);
+
+			// is this quiz an exam?
+			$sql = "Select * from $table_exam where id=$obj->id";
+			$rs = api_sql_query($sql, __FILE__, __LINE__);
+			if (mysql_num_rows($rs)>0)
+			{
+			    //Yes, is an exam
+			    $row = Database::fetch_object($rs);
+			    $quiz = new Quiz($obj->id, $obj->title, $obj->description, $obj->random, $obj->type, $obj->active,'',1,$row->intentos,$row->minimo);
+			}
+			else
+			{
+			    //No, is a normal quiz
+			    $quiz = new Quiz($obj->id, $obj->title, $obj->description, $obj->random, $obj->type, $obj->active,$obj->sound,0,0,0);
+			}
+			
 			$sql = 'SELECT * FROM '.$table_rel.' WHERE exercice_id = '.$obj->id;
 			$db_result2 = api_sql_query($sql, __FILE__, __LINE__);
 			while ($obj2 = Database::fetch_object($db_result2))

@@ -61,6 +61,13 @@ class Quiz extends Resource
 	 */
 	var $question_ids;
 	/**
+	* For new tool exam.
+	*/
+	var $exam;
+	var $intentos;
+	var $minimo;
+
+	/**
 	 * Create a new Quiz
 	 * @param string $title
 	 * @param string $description
@@ -68,7 +75,7 @@ class Quiz extends Resource
 	 * @param int $type
 	 * @param int $active
 	 */
-	function Quiz($id,$title,$description,$random,$type,$active,$media)
+	function Quiz($id,$title,$description,$random,$type,$active,$media,$exam,$intentos,$minimo)
 	{
 		parent::Resource($id,RESOURCE_QUIZ);
 		$this->title = $title;
@@ -78,6 +85,9 @@ class Quiz extends Resource
 		$this->active = $active;
 		$this->media = $media;
 		$this->question_ids = array();
+		$this->exam = $exam;
+		$this->intentos = $intentos;
+		$this->minimo = $minimo;
 	}
 	/**
 	 * Add a question to this Quiz

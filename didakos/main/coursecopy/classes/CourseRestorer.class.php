@@ -642,6 +642,8 @@ class CourseRestorer
 			$table_qui = Database :: get_course_table(TABLE_QUIZ_TEST, $this->course->destination_db);
 			$table_rel = Database :: get_course_table(TABLE_QUIZ_TEST_QUESTION, $this->course->destination_db);
 			$table_doc = Database :: get_course_table(TABLE_DOCUMENT, $this->course->destination_db);
+			$table_exam = Database :: get_course_table(TABLE_QUIZ_TEST_EXAM, $this->course->destination_db);
+
 			$resources = $this->course->resources;
 			foreach ($resources[RESOURCE_QUIZ] as $id => $quiz)
 			{
@@ -659,6 +661,15 @@ class CourseRestorer
 				$sql = "INSERT INTO ".$table_qui." SET title = '".Database::escape_string($quiz->title)."', description = '".Database::escape_string($quiz->description)."', type = '".$quiz->quiz_type."', random = '".$quiz->random."', active = '".$quiz->active."', sound = '".Database::escape_string($doc)."' ";
 				api_sql_query($sql, __FILE__, __LINE__);
 				$new_id = Database::get_last_insert_id();
+
+				// is this quiz an exam?
+				if ($quiz->exam==1)
+				{
+				  //Yes, is an exam
+				  $sql = "INSERT INTO $table_exam SET id=".$new_id.",intentos=".$quiz->intentos.",minimo=" . $quiz->minimo;
+				  api_sql_query($sql, __FILE__, __LINE__);
+				}
+
 				$this->course->resources[RESOURCE_QUIZ][$id]->destination_id = $new_id;
 				foreach ($quiz->question_ids as $index => $question_id)
 				{
