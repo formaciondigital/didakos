@@ -86,7 +86,8 @@ $form->addElement('hidden', 'tipo_usuario', $_GET["tipo_usuario"] );
 -texto en caso de no pasar la validacion
 -nombre de la regla de validacion que vamos a usar*/
 $form->addRule('c_dni', get_lang('ThisFieldIsRequired'), 'required');
-$form->addRule('c_dni', get_lang("DNIIncorrecto"), 'dni');
+// No hay validación de DNI
+//$form->addRule('c_dni', get_lang("DNIIncorrecto"), 'dni');
 
 
 $form->addElement('submit', 'submit', get_lang('langSend'));
