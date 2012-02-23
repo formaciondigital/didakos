@@ -644,4 +644,6 @@ $shownone = "Contraure totes les categories";
 $UpcomingEvent = "Proper esdeveniment";
 $ListView = "Mostrar com  llistat";
 $AgendaSortChronologicallyDown = "Ordenar l'agenda del més recent al més antic";
+
+$Aceptar = "Aceptar";
 ?>

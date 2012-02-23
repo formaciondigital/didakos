@@ -607,4 +607,5 @@ $ServTecnico = "Technical Support";
 /*------------------------------------------------------------------------------*/
 // Revisión idiomas Didakos 2.0 03/02/2012
 $Volver = "Return";
+$Aceptar = "Accept";
 ?>

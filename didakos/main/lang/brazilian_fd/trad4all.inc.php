@@ -445,4 +445,5 @@ $ServTecnico = "Suporte técnico";
 $TiempoTotal= "Tempo Total";
 // Revisión idiomas Didakos 2.0 03/02/2012
 $Volver = "Voltar";
+$Aceptar = "Aceitar";
 ?>

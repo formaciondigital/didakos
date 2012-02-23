@@ -606,4 +606,5 @@ $VerMas = "Ver más";
 $ConectadoChat="Está conectado al chat";
 $ChatDelCurso="Chat del curso";
 $Volver = "Volver";
+$Aceptar = "Aceptar";
 ?>

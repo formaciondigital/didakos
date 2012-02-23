@@ -619,4 +619,5 @@ $ConectadoChat="Êst connecté au chat";
 $ChatDelCurso="Chat du cours";
 // Revisión idiomas Didakos 2.0 03/02/2012
 $Volver = "Retour";
+$Aceptar = "Accepter";
 ?>

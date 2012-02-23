@@ -183,7 +183,7 @@ $result = api_sql_query($sql,__FILE__,__LINE__);
                         </td>
                          <td><?php echo get_lang("templatedesc");?></td>
 		</tr>
-                <tr><td colspan="4" align="right"><input type="button" onclick="javascript:Validar();" value="Aceptar" name="Aceptar"></td></tr>
+                <tr><td colspan="4" align="right"><input type="button" onclick="javascript:Validar();" value=<?php echo get_lang("Aceptar");?> name="Aceptar"></td></tr>
     </table>
                 
     
