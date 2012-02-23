@@ -95,7 +95,7 @@ $Warning = "Warning";
 $ReadWarningBelow = "read warning below";
 $SecurityAdvice = "Security advice";
 $YouHaveMoreThanXCourses = "You have more than %d courses on your Didakos 2.0 platform ! Only %d courses have been updated. To update the other courses, %sclick here %s";
-$ToProtectYourSiteMakeXAndYReadOnly = "To protect your site, make %s and %s (but not their directories) read-only (CHMOD 444).";
+$ToProtectYourSiteMakeXAndYReadOnly = "To protect your site, make %s read-only (CHMOD 444),and delete the following file: %s";
 $Error = "Error";
 $Back = "Back";
 $HasNotBeenFound = "has not been found";
@@ -128,4 +128,5 @@ $langcatalan_fd = "Catalan";
 $langenglish_fd = "English";  
 $langfrench_fd = "French";  
 $langspanish_fd = "Spanish"; 
+$wrongUrl = "wrong url,must begin with http:// ";
 ?>

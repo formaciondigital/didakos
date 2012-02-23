@@ -1073,52 +1073,18 @@ function display_configuration_settings_form(
 
 	echo "</td></tr>\n<tr><td>";
 	echo "<table width=\"100%\">";
-
-	//First parameter: language
-	echo "<tr>\n";
-	echo '<td>'.get_lang('MainLang')."&nbsp;&nbsp;</td>\n";
-	if($installType == 'update')
-	{
-		echo '<td><input type="hidden" name="languageForm" value="'.htmlentities($languageForm).'" />'.$languageForm."</td>\n";
-	}
-	else // new installation
-	{
-		echo '<td>';
-		echo "<select name=\"languageForm\">\n";
-		$dirname='../lang/';
-		
-		if ($dir=@opendir($dirname)) {
-			$lang_files = array();
-				while (($file = readdir($dir)) !== false) {
-					if($file != '.' && $file != '..' && $file != 'CVS' && $file != '.svn' && is_dir($dirname.$file)){
-						array_push($lang_files, $file);
-					}
-				}
-			closedir($dir);
-		}
-		sort($lang_files);
-		
-		foreach ($lang_files as $file) {
-                    $idioma = get_lang($file);
-			echo '<option value="'.$file.'"';
-				if($file == $languageForm."_fd") echo ' selected="selected"';
-				echo ">$idioma</option>\n";
-		}
-
-
-		echo '</select>';
-		echo "</td>\n";
-	}
-	echo "</tr>\n";
-
+	//First parameter: language	
+	echo '<input type="hidden" name="languageForm" value="'.htmlentities($languageForm).'" />';
 	//Second parameter: Dokeos URL
 	echo "<tr>\n";
 	echo '<td>'.get_lang('DokeosURL').' (<font color="#cc0033">'.get_lang('ThisFieldIsRequired')."</font>)&nbsp;&nbsp;</td>\n";
 	
 	if($installType == 'update') echo '<td>'.htmlentities($urlForm)."</td>\n";
-	else echo '<td><input type="text" size="40" maxlength="100" name="urlForm" value="'.htmlentities($urlForm).'" />'."</td>\n";
+	else echo '<td><input type="text" size="40" maxlength="100" name="urlForm" id="urlForm" value="'.htmlentities($urlForm).'" />'."</td>\n";
 	
 	echo "</tr>\n";
+        
+        echo "<tr><td></td><td><div id='error_url' style=\"display:none; color:#FF0000 \">".  get_lang("wrongUrl")."</div></td></tr>";
         
         display_configuration_parameter($installType, get_lang("CampusName"), "campusForm", $campusForm);
 
@@ -1215,7 +1181,10 @@ function display_configuration_settings_form(
 	</tr>
 	<tr>
 	  <td><input type="submit" name="step3" value="&lt; <?php echo get_lang('Previous'); ?>" /></td>
-	  <td align="right"><input type="submit" name="step5" value="<?php echo get_lang('Next'); ?> &gt;" /></td>
+	  <td align="right">
+              <input type="submit" name="step5" value="<?php echo get_lang('Next'); ?> &gt;" />
+            
+          </td>
 	</tr>
 	</table>
 	<?php
@@ -1242,13 +1211,13 @@ function display_after_install_message($installType, $nbr_courses)
 	echo '<img src="../img/message_warning.png" style="float:left; margin-right:10px;" alt="'.get_lang('Warning').'"/>';
 	echo '<b>'.get_lang('SecurityAdvice').'</b>';
 	echo ': ';
-	printf(get_lang('ToProtectYourSiteMakeXAndYReadOnly'),'main/inc/conf/configuration.php','main/install/index.php');
+	printf(get_lang('ToProtectYourSiteMakeXAndYReadOnly'),'main/inc/conf/configuration.php','main/inc/finishInstallation.php');
 	echo '</div>';
 	?>
 
 
 	</form>
-	<a href="../../index.html"><?php echo get_lang('GoToYourNewlyCreatedPortal'); ?></a>
+	<a href="../inc/finishInstallation.php"><?php echo get_lang('GoToYourNewlyCreatedPortal'); ?></a>
 	<?php
 }
 

@@ -146,7 +146,7 @@ CREATE TABLE `{MYSQL_PREFIX}_main`.`oauth_server_token` (
 
 
 -- insercion de registros en tabla de moviles
-INSERT INTO oauth_consumer_registry VALUES (1,1,'claveconsumer1','noneatthismoment','HMAC-SHA1,PLAINTEXT','{PLATFORM_URL}/ilearning/oauth/','{PLATFORM_URL}','ilearning/oauth/','{PLATFORM_URL}/ilearning/oauth/request_token.php','{PLATFORM_URL}/ilearning/oauth/authorize.php','{PLATFORM_URL}/ilearning/oauth/access_token.php',sysdate());
+INSERT INTO oauth_consumer_registry VALUES (1,1,'claveconsumer1','noneatthismoment','HMAC-SHA1,PLAINTEXT','{PLATFORM_URL}ilearning/oauth/','{PLATFORM_URL}','ilearning/oauth/','{PLATFORM_URL}ilearning/oauth/request_token.php','{PLATFORM_URL}ilearning/oauth/authorize.php','{PLATFORM_URL}ilearning/oauth/access_token.php',sysdate());
 insert into oauth_server_registry values (1,1,'claveconsumer1','noneatthismoment',1,'active','Ilearning Iphone app','ilearning@formaciondigital.com','','','Ilearning Iphone app','','','',0,'','');
 
 

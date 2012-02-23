@@ -393,6 +393,21 @@ elseif (!empty($_POST['step5']))
 				init_visibility = 0;				
 			}
 		}
+		
+		function check_url(){
+                  var url = document.getElementById("urlForm").value;
+
+		  if(url.substr(0,7) != 'http://'){
+                      document.getElementById("error_url").style.display='inline';
+                      scrollTo(0,0);
+                      return false;
+                  }else{
+                      document.getElementById("error_url").style.display='none';
+                       document.frm.submit();
+                  }
+		 
+		}
+		
 	</script>
 <?php if(!empty($charset)){ ?>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset ?>" />
@@ -407,8 +422,10 @@ elseif (!empty($_POST['step5']))
 	<div id="header3">&nbsp;</div>
 </div>
 
-
-<form style="padding: 0px; margin: 0px;" method="post" action="<?php echo api_get_self(); ?>?running=1&amp;installType=<?php echo $installType; ?>&amp;updateFromConfigFile=<?php echo urlencode($updateFromConfigFile); ?>">
+<?php
+$on_submt = isset($_POST['step4']) ? " onSubmit='return check_url();' " : "" ; 
+?>
+<form name="frm" style="padding: 0px; margin: 0px;" method="post" action="<?php echo api_get_self(); ?>?running=1&amp;installType=<?php echo $installType; ?>&amp;updateFromConfigFile=<?php echo urlencode($updateFromConfigFile);  ?>" <?php echo $on_submt;?>>
 
 <div id="installation_steps">
 	
@@ -589,7 +606,7 @@ elseif($_POST['step5'])
 
 	<blockquote>
 
-	<?php echo get_lang('MainLang').' : '.$languageForm; ?><br /><br />
+	<?php //echo get_lang('MainLang').' : '.$languageForm; ?>
         <?php echo "<br/><i>".  get_lang('DBHost')."</i>"; ?><br />
 	<?php echo get_lang('DBHost').' : '.$dbHostForm; ?><br />
 	<?php echo get_lang('DBLogin').' : '.$dbUsernameForm; ?><br />

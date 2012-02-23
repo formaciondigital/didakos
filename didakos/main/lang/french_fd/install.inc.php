@@ -95,7 +95,7 @@ $Warning = "Avertissement";
 $ReadWarningBelow = "lire l\'avertissement ci-dessous";
 $SecurityAdvice = "Conseil de sécurité";
 $YouHaveMoreThanXCourses = "Vous avez plus de %d cours sur votre campus Didakos 2.0 ! %d cours seulement ont été mis à jour. Pour mettre les autres à jour, %s cliquez ici %s";
-$ToProtectYourSiteMakeXAndYReadOnly = "Pour protéger votre site, mettez %s et %s (pas leur répertoires) en lecture seule (CHMOD 444).";
+$ToProtectYourSiteMakeXAndYReadOnly = "Pour protéger son endroit, configurez %s comme archive de seul lecture (CHMOD 444) et éliminez l'archive %s.";
 $Error = "Erreur";
 $Back = "Retour";
 $HasNotBeenFound = "n\'a pas été trouvé";
@@ -128,4 +128,5 @@ $langcatalan_fd = "catalan";
 $langenglish_fd = "anglais";
 $langfrench_fd = "français";
 $langspanish_fd = "espagnol";
+$wrongUrl = "L'url est incorrect, doit commencer par http: // ";
 ?>
