@@ -152,6 +152,8 @@ $_configuration['dokeos_stable'] 	= {NEW_VERSION_STABLE};
 // VLAB
 //url to connect to vlab api
 $_configuration['url_vlab_api'] =  '';
+//path to ssl certificate
+$_configuration['path_certificate'] =  '';
 
 
 ?>

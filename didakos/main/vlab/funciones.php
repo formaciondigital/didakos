@@ -262,14 +262,18 @@ function init_curl() {
     curl_setopt($ch, CURLOPT_VERBOSE, TRUE); 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
     curl_setopt($ch, CURLOPT_TIMEOUT, 200 ); 
-    curl_setopt($ch, CURLOPT_HEADER, 0);  
-    /* Eliminamos el uso de certificados
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0 ); 
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);         
-    curl_setopt($ch, CURLOPT_SSLVERSION,3);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+		
+		//if is set ssl certificate path in configuration file
+		if($_configuration['path_certificate'] != '')
+		{			
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0 ); 
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);         
+			curl_setopt($ch, CURLOPT_SSLVERSION,3);
 
-    curl_setopt($ch, CURLOPT_SSLCERT, $_configuration['path_certificate'] ); */
-	
+			curl_setopt($ch, CURLOPT_SSLCERT, $_configuration['path_certificate'] ); 
+		}
+		
     return $ch;
     }
 
