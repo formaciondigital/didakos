@@ -228,7 +228,7 @@ function GetPracticasList ($curso)
 {
     global $t_practicas;
    
-	$sql = "SELECT id_maquina as name,descripcion as description,id_practica,tiempo FROM $t_practicas where id_curso = ".$curso." and activa = 'S'";
+	$sql = "SELECT id_maquina as name,descripcion as description,id_practica,tiempo FROM $t_practicas where id_curso = '".$curso."' and activa = 'S'";
     return api_store_result(api_sql_query($sql));
 	
 }
@@ -238,7 +238,7 @@ function GetDatosPractica ($id_practica,$id_curso)
 {
     global $t_practicas;
    
-	$sql = "SELECT * FROM $t_practicas where id_curso = ".$id_curso." and id_practica = ".$id_practica;
+	$sql = "SELECT * FROM $t_practicas where id_curso = '".$id_curso."' and id_practica = ".$id_practica;
     return api_store_result(api_sql_query($sql));
 	
 }
