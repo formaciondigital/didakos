@@ -209,7 +209,7 @@ function FdTablaFila($columnas, $extraTD=null)
 	else
 	{
 		$tabla .= '<tr>';
-		$tabla .= '<td colspan="4"' . $extraTD . '>No hay m&aacute;quinas virtuales disponibles</td>'; 
+		$tabla .= '<td colspan="4"' . $extraTD . '>'.get_lang('langNoMachinesAval').'</td>'; 
 		$tabla .= '</tr>';
 	}
 	return $tabla;

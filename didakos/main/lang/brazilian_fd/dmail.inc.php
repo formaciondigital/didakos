@@ -1,4 +1,10 @@
 <?php 
+$Carpetas_loc= "Pastas locais";
+$Carpetas_per= "Pastas pessoais";
+$Gestionar_carpetas= "Organizar pastas";
+$Sinmensajes= "Sem mensagens";
+$Buscar="Procurar";
+
 $A = "A";
 $Aceptar = "Aceitar";
 $Adjunto = "Anexo";

@@ -441,6 +441,7 @@ $SeeDetail = "Ver detalhes";
 $GroupSingle = "Grupo";
 $PleaseLoginAgainFromHomepage = "Por favor tente realizar o login novamente na página principal";
 $PleaseLoginAgainFromFormBelow = "Por favor tente realizar seu login novamente utilizando o o formulário abaixo";
+$Ver_examen="Ver prova";
 $ServTecnico = "Suporte técnico";
 $TiempoTotal= "Tempo Total";
 // Revisión idiomas Didakos 2.0 03/02/2012
