@@ -658,7 +658,7 @@ public function getSupportedContents($course_id){
 	mysql_select_db($db_prefix.$course_id);
 	$rs = mysql_query($sql,$conn);
 	while($row = mysql_fetch_array($rs)){
-		switch ($row["name"])
+		switch (strtolower($row["name"]))
 		{
 			case "quiz":
 				$course_content["2"] = 2;
@@ -669,10 +669,10 @@ public function getSupportedContents($course_id){
 			case "document":
 				$course_content["4"] = 5;
 				break;
-			case "Podcast":
+			case "podcast":
 				$course_content["5"] = 6;
 				break;
-			case "Dmail":
+			case "pmail":
 				$course_content["7"] = 7;
 				break;
 			case "forum":
@@ -696,14 +696,17 @@ public function getSupportedContents($course_id){
 			case "tracking":
 				$course_content["15"] = 14;
 				break;
-			// three possible options here. first one is the valid one. Other are older versions.
-			case "Serviciotecnico":
+			// four possible options here. last one is the valid one. Other are older versions.
+			case "serviciotecnico":
 				$course_content["16"] = 15;
 				break;
-			case "Servicio tecnico":
+			case "servicio tecnico":
 				$course_content["16"] = 15;
 				break;
-			case "Servicio t&eacute;cnico":
+			case "servicio t&eacute;cnico":
+				$course_content["16"] = 15;
+				break;
+			case "ServTecnico":
 				$course_content["16"] = 15;
 				break;
 			case "multimedia":
