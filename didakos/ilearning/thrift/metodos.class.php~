@@ -672,7 +672,7 @@ public function getSupportedContents($course_id){
 			case "podcast":
 				$course_content["5"] = 6;
 				break;
-			case "dmail":
+			case "pmail":
 				$course_content["7"] = 7;
 				break;
 			case "forum":
@@ -706,7 +706,7 @@ public function getSupportedContents($course_id){
 			case "servicio t&eacute;cnico":
 				$course_content["16"] = 15;
 				break;
-			case "servtecnico":
+			case "ServTecnico":
 				$course_content["16"] = 15;
 				break;
 			case "multimedia":
