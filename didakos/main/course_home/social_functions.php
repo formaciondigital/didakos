@@ -431,7 +431,7 @@ list ($eventos_por_tipo,$max_eventos,$orden,$post_orden,$social,$visibility,$tip
 				$evento[]=8;
 				$evento[]=$post["post_date"];
 				$evento[]=strip_tags(substr($post["post_title"] . '. ' . $post["post_text"],0,200)) . ' ...';
-				$evento[]=strip_tags($post["poster_id"]);
+				$evento[]=$post["poster_id"];
 				$evento[]= $web_code_path."forum/viewthread.php?cidReq=" . $id_curso . "&forum=" . $post["forum_id"] . "&thread=" . $post["thread_id"];
 				$indice = $indice + 1;		
 				$lista_eventos[] = $evento;
