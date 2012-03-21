@@ -126,7 +126,7 @@ echo '<h4>'.get_lang('Users').'</h4>';
 echo '<blockquote>';
 $table_course_user = Database :: get_main_table(TABLE_MAIN_COURSE_USER);
 $table_user = Database :: get_main_table(TABLE_MAIN_USER);
-$sql = 'SELECT *,cu.status as course_status FROM '.$table_course_user.' cu, '.$table_user." u WHERE cu.user_id = u.user_id AND cu.course_code = '".$code."' ";
+$sql = 'SELECT *,cu.status as course_status FROM '.$table_course_user.' cu, '.$table_user." u WHERE cu.user_id = u.user_id AND cu.course_code = '".$code."' AND u.user_id<>1 ";
 $res = api_sql_query($sql,__FILE__,__LINE__);
 if (mysql_num_rows($res) > 0)
 {
