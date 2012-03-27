@@ -179,11 +179,11 @@ $gidReset = isset($gidReset) ? $gidReset : '';
 $login = isset($_POST["login"]) ? $_POST["login"] : '';
 
 /*
-   CAMBIO FD, guardamos en la sesión el idioma, que se pasa cuando el usuario se está logando desde el acceso directo de español (es).
+   CAMBIO FD, guardamos en la sesión el idioma, que se pasa cuando el usuario se está logando desde el acceso directo multiidioma.
    Esta variable de sesión, $_SESSION ['idioma_acceso'], se usará para sustituir las preferencias de idioma del usuario y del curso que 
-   estén guardadas en la bd, por el idioma de SPANISH, para que cuando se entre por el acceso directo de español, se vea todo en español
-   (y no en catalán, idioma por defecto de la plataforma, que se toma como idioma por defecto al crear los cursos y usuarios).	
+   estén guardadas en la bd, por el idioma que se selecciona en el acceso directo.
 */
+
 // Al realizar modificaciones en los datos de usuario se vuelve a acceder a esta página, pero ya no existe la variable $_POST["access_lang"]. Corregimos
 $_SESSION ['idioma_acceso'] = isset($_POST["access_lang"])?$_POST["access_lang"]:$_SESSION ['idioma_acceso'];
 // FIN CAMBIO FD
